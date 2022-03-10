@@ -1,3 +1,4 @@
+package Oblig2
 class BlaaResept extends Resept{
     
     //Konstruktor

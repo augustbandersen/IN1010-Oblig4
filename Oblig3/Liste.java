@@ -1,4 +1,5 @@
-interface Liste <T> {
+package Oblig3;
+interface Liste <T> extends Iterable<T> {
     int stoerrelse ();
     void leggTil (T x);
     T hent ();

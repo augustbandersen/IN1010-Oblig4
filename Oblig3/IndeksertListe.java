@@ -1,110 +1,47 @@
-class IndeksertListe<T> extends Lenkeliste<T> {
-    
-    public void leggTil(int pos, T x){ //Skal legge til node paa en gitt posisjon
-        if (pos > stoerrelse() || pos < 0){ //Hvis indeks er storre enn storrelsen paa listen eller mindre enn 0
-            throw new UgyldigListeindeks(pos);
-        }
+package Oblig3;
+public class IndeksertListe<T> extends Lenkeliste<T> {
+    public void leggTil(int pos, T x){
+        if(0 > pos || pos > this.stoerrelse) throw new UgyldigListeindeks(pos);
+        Node node = new Node(x);
+        Node nodeFoer = null;
+        Node nodeEtter = null;
+        stoerrelse ++;
+        try{nodeFoer = getNode(pos-1);}
+        catch(UgyldigListeindeks uli){}
 
-        Node nyNode = new Node(x);
-        nyNode.neste = null;
-        Node tmp;
+        try{nodeEtter = getNode(pos);}
+        catch(UgyldigListeindeks uli){}
 
-        if (pos == 0 && start != null){ //Sjekker om posisjonen er 0 og listen er tom
-            tmp = start;
-            start = nyNode;
-            nyNode.neste = tmp;
-        } else { //Lager lokke som finner riktig posisjon og putter inn en nyNode
-            Node denne = start;
-            int teller = 0;
-            Node node = null;
-            while (denne != null){
-                if (teller == pos) {
-                    node.neste = nyNode;
-                    nyNode.neste = denne;
-                }
-                node = denne;
-                denne = denne.neste;
-                teller++;
-            }
-        }
+        if(nodeFoer == null) this.foersteNode = node;
+        else nodeFoer.neste = node;
+        if(nodeEtter == null) this.sisteNode = node;
+        else node.neste = nodeEtter;
 
-        if (start == null) { //Hvis start ikke peker paa noe, blir startnoden en ny Node
-            start = nyNode;
-        }
-
-        if (pos == stoerrelse()) { //Hvis pos er 1 utenfor listens storrelse, legges noden paa slutten
-            leggTil(x);
-          }
     }
-
-    public void sett(int pos, T x){ //Skal erstatte elementet i posisjon pos med x
-        if (pos >= stoerrelse() || pos < 0){ //Hvis indeks er storre enn eller lik storrelsen paa listen eller mindre enn 0
-            throw new UgyldigListeindeks(pos); 
-        }
-
-        Node denne = start;
-        int teller = 0;
-        if (pos == 0 && denne != null){ //Hvis pos er 0 og start peker på null, settes start sin nodeInfo til x
-            start.nodeInfo = x;
-        }
-        while (denne != null){ //Gaar gjennom listen til den finner riktig pos og endrer nodeInfo paa den noden til x
-            if (teller == pos){
-                denne.nodeInfo = x;
-            }
-            denne = denne.neste;
-            teller++;
-        }
+    public void sett(int pos, T x){
+        getNode(pos).objekt = x;
     }
-
-    public T hent(int pos){ //Skal hente infoen til elementet i gitt posisjon
-        if (pos >= stoerrelse() || pos < 0){ //Hvis indeks er storre enn eller lik storrelsen paa listen eller mindre enn 0
-            throw new UgyldigListeindeks(pos);
-        }
-
-        Node denne = start;
-        int teller = 0;
-        if (pos == 0 && denne != null){ //Hvis pos er 0 og start ikke er null, returnerer den start sin nodeInfo
-            return denne.nodeInfo;
-        }
-
-        while (denne != null){ //Returnerer nodeInfo til node paa gitt pos
-            if (teller == pos){
-                return denne.nodeInfo;
-            }
-            denne = denne.neste;
-            teller++;
-        }
-        return null;
+    public T hent(int pos){
+        return getNode(pos).objekt;
     }
-
-
-    public T fjern(int pos){ //Skal fjerne elementet paa gitt pos of returnere det
-        if (pos >= stoerrelse() || pos < 0 || start == null) { //Exeption hvis listen er tom eller indeksen er ugyldig
-            throw new UgyldigListeindeks(pos);
+    public T fjern(int pos){ 
+        Node node = getNode(pos);
+        try{
+            getNode(pos-1).neste = node.neste;  //prøver å finne forrige node
+        }catch(UgyldigListeindeks uli3){        // om den ikke eksisterer prøver jeg å sette neste som første
+            try{
+                this.foersteNode = node.neste;
+            }catch(NullPointerException npe){}
         }
-
-        Node denne = start;
-        Node forrige = null;
-        if (pos == 0 && denne != null){ //Hvis pos er 0 og startnoden finnes setter den noden etter start som nye start og returnerer original start sin nodeInfo
-            start = denne.neste;
-            return denne.nodeInfo;
+        stoerrelse --;
+        return node.objekt;
+    }
+    private Node getNode(int pos){
+        if(0 > pos || pos >= this.stoerrelse) throw new UgyldigListeindeks(pos);
+        Node node = this.foersteNode;
+        for(int i = 0; i < pos; i++){
+            node = node.neste;
         }
-
-        int teller = 0;
-        while (denne != null){ //Finner riktig pos og returnerer nodeInfo der og flytter pekerene slik at noden paa pos blir fjernet
-            if (teller == pos){
-                forrige.neste = denne.neste;
-                return denne.nodeInfo;
-            } else {
-                forrige = denne;
-                denne = denne.neste;
-                teller++;
-            }
-
-        }
-        if (denne == null) { //Hvis pos ikke finnes, blir det printet en feilmelding 
-            System.out.println(pos + "element finnes ikke");
-        }
-        return null;
+        return node;
     }
 }

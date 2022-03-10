@@ -1,3 +1,5 @@
+package Oblig3;
+
 import java.util.Iterator;
 
 public abstract class Lenkeliste<T> implements Liste<T> {
