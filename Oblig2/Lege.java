@@ -1,3 +1,5 @@
+package Oblig2
+
 class Lege implements Comparable<Lege> {
     String legeNavn;
     IndeksertListe<Resept> utskrevneResepter = new IndeksertListe<>();
