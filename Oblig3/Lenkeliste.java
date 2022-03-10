@@ -1,82 +1,100 @@
-abstract class Lenkeliste<T> implements Liste<T> {
-    protected Node start;
+import java.util.Iterator;
 
-    public int stoerrelse() { //Skal returnere hvor mange elementer det er i listen
-        int stoerrelse = 0;
-        Node node = start;
+public abstract class Lenkeliste<T> implements Liste<T> {
+    class Node{
+        Node neste = null;
+        T objekt;
+
+        Node(T objekt){
+            this.objekt = objekt;
+        } 
+        public String toString(){return this.objekt.toString();}
+    }
+    protected int stoerrelse;
+    protected Node foersteNode;
+    protected Node sisteNode;
+
+    class LenkelisteIterator implements Iterator<T> {
+        Node neste = null;
+        Node node;
+        Boolean opprettet = false;
+
+        public LenkelisteIterator(){
+            node = foersteNode;
+            if(node != null) neste = node.neste; 
+        }
+        @Override
+        public T next(){
+            T objekt = node.objekt;
+            node = neste;
+            if(node != null) neste = node.neste;
+            return objekt;
+        }  
+        @Override
+        public boolean hasNext(){
+            return node != null;
+        }
+    }
+    
+    public Lenkeliste(){
+        stoerrelse = 0;
+        foersteNode = null;
+        sisteNode = null;
+    }
+ 
+    @Override
+    public T fjern() {
+        T objekt;
+        Node node = this.foersteNode;
+        try{objekt = node.objekt;}
+        catch(NullPointerException npe){throw new UgyldigListeindeks(-1);}
+        if(node.neste == null) this.foersteNode = this.sisteNode = null;
+        else this.foersteNode = this.foersteNode.neste;
+        this.stoerrelse --;
+        return objekt;
         
-        if (node == null){ //Hvis noden ikke peker på noe
-            return stoerrelse;
-        }
+    }
 
-        while (node != null){ //Oker storrelse med 1 helt til det ikke finnes flere aa peke paa
-            stoerrelse ++;
-            node = node.neste;
+    @Override
+    public T hent() {
+        try{
+            return this.foersteNode.objekt;
+        }catch(NullPointerException npe){
+            throw new UgyldigListeindeks(-1);
         }
+        
+    }
+
+    @Override
+    public void leggTil(T x) {
+        Node node = new Node(x);
+        try{
+            this.sisteNode.neste = node;
+        }catch(NullPointerException npe){
+            this.foersteNode = node;
+        }
+        this.sisteNode = node;
+        this.stoerrelse += 1;
+
+    }
+
+    @Override
+    public int stoerrelse() {
         return stoerrelse;
     }
 
-    public void leggTil(T x){ //Skal legge inne et nytt element paa slutten av listen
-        Node nyNode = new Node(x);
-        nyNode.neste = null;
-
-        if (start == null){ //hvis det ikke finnes en node, blir startnoden nyNode
-            start = nyNode;
-        } else { //legger paa slutten av listen
-            Node siste = start;
-            while (siste.neste != null){
-                siste = siste.neste;
-            }
-            siste.neste = nyNode;
-        }
+    @Override
+    public Iterator<T> iterator(){
+        return new LenkelisteIterator();
     }
-    
-    public T hent() { //Skal returner det forste elemntet i listen
-        Node node = start;
-        return node.hentNodeInfo();
-    }
-
-    public T fjern(){ //Skal fjerne det forste elementet i listen og returnere det
-        if (start == null) { //Hvis det ikke finnes noen node, vil det bli kjort UgyldigListeindeks
-            throw new UgyldigListeindeks(0);
-        }
-        Node node = start;
-        if (start != null) { //Hvis det finnes noder, blir start satt som neste node, som vil si at den originale noden peker paa null
-        start = node.neste;
-        return node.hentNodeInfo(); //returnerer nodeinfor paa original node
-        }
-        return null;
-    }
-
-    public String toString(){ //Skal bygge opp en en svarstreng av elementene i listen
-        String svarstreng = "";
-        Node node = start;
-
-        while (node != null){
-            svarstreng += node + ", ";
+    public String toString(){
+        String output = "[";
+        Node node = this.foersteNode;
+        for(int i = 0; i < stoerrelse-1; i++){
+            output += node.toString() + ", ";
             node = node.neste;
-        }
-        
-        return svarstreng;
+        } try{output += node.toString();} catch(NullPointerException npe){}
+        return output + "]";
     }
 
-
-    protected class Node { //Nodeklasse
-        protected T nodeInfo;
-        protected Node neste;
-    
-        protected Node(T nodeInfo){
-          this.nodeInfo = nodeInfo;
-        }
-       
-        protected T hentNodeInfo(){
-            return nodeInfo;
-        }
-    
-        @Override
-        public String toString() {
-          return nodeInfo.toString();
-        }
-    }
-    
 }
