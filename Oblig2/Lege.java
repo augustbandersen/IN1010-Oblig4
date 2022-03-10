@@ -1,4 +1,4 @@
-package Oblig2
+package Oblig2;
 
 class Lege implements Comparable<Lege> {
     String legeNavn;
