@@ -1,4 +1,4 @@
-package Oblig3;
+package Lenkeliste;
 public class Stabel<T> extends Lenkeliste<T>{
     @Override
     public void leggTil(T x){

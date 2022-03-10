@@ -1,4 +1,4 @@
-package Oblig2;
+package Sykehus;
 
 class UlovligUtskrift extends Exception {
     UlovligUtskrift (Lege l, Legemiddel lm) {

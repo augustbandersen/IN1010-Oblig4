@@ -1,4 +1,4 @@
-package Oblig2
+package Sykehus;
 class BlaaResept extends Resept{
     
     //Konstruktor

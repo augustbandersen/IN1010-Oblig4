@@ -1,4 +1,4 @@
-package Oblig2;
+package Sykehus;
 class Vanlig extends Legemiddel{
     private static int antall;
     private int vanligId;

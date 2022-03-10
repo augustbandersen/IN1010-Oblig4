@@ -1,4 +1,4 @@
-package Oblig3;
+package Lenkeliste;
 
 import java.util.Iterator;
 

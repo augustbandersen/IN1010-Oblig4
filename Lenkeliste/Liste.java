@@ -1,4 +1,4 @@
-package Oblig3;
+package Lenkeliste;
 interface Liste <T> extends Iterable<T> {
     int stoerrelse ();
     void leggTil (T x);

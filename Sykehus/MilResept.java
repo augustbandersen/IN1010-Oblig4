@@ -1,3 +1,4 @@
+package Sykehus;
 class MilResept extends HvitResept{
 
     //Konstruktor uten parameteren reit / den er satt til 3

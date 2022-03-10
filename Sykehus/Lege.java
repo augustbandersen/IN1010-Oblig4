@@ -1,5 +1,6 @@
-package Oblig2;
+package Sykehus;
 
+import Lenkeliste.*;
 class Lege implements Comparable<Lege> {
     String legeNavn;
     IndeksertListe<Resept> utskrevneResepter = new IndeksertListe<>();

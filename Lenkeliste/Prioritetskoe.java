@@ -1,4 +1,4 @@
-package Oblig3;
+package Lenkeliste;
 public class Prioritetskoe<T extends Comparable<T>> extends Lenkeliste<T>{
     public Prioritetskoe(){
         this.stoerrelse = 0;

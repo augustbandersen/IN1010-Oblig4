@@ -1,3 +1,4 @@
+package Sykehus;
 abstract class Legemiddel {
     protected String navn;
     protected int pris;

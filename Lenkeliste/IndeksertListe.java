@@ -1,4 +1,4 @@
-package Oblig3;
+package Lenkeliste;
 public class IndeksertListe<T> extends Lenkeliste<T> {
     public void leggTil(int pos, T x){
         if(0 > pos || pos > this.stoerrelse) throw new UgyldigListeindeks(pos);

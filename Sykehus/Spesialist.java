@@ -1,3 +1,4 @@
+package Sykehus;
 class Spesialist extends Lege implements Godkjenningsfritak{
     String kontrollId;
     

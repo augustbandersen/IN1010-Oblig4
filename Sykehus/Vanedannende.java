@@ -1,3 +1,4 @@
+package Sykehus;
 class Vanedannende extends Legemiddel{
     private int styrke;
     private static int antall;

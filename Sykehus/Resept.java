@@ -1,3 +1,4 @@
+package Sykehus;
 abstract class Resept {
     private int reseptId;
     private static int antall;

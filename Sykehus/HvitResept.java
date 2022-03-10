@@ -1,3 +1,4 @@
+package Sykehus;
 class HvitResept extends Resept{
     
     //Konstruktor
