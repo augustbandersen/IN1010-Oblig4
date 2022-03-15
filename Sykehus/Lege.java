@@ -28,11 +28,11 @@ class Lege implements Comparable<Lege> {
         return utskrevneResepter;
     }
 
-    HvitResept skrHvitResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift{}
+    //HvitResept skrHvitResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift{}
 
-    MilResept skrivMilResept (Legemiddel legemiddel, Pasient pasient) throws UlovligUtskrift{}
+    //MilResept skrivMilResept (Legemiddel legemiddel, Pasient pasient) throws UlovligUtskrift{}
 
-    PResept skrivPResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift{}
+   //PResept skrivPResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift{}
 
-    BlaaResept skrivBlaaResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift{}
+    //BlaaResept skrivBlaaResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift{}
 }
