@@ -5,6 +5,8 @@ import java.lang.ProcessBuilder;
 
 public class Hovedprogram {
     public static void main(String[] args) {
+        Legesystem legesystem = new Legesystem();
+        legesystem.lesFraFil("legedata.txt");
         Scanner in = new Scanner(System.in);
         String input;
         Boolean run = true;
@@ -55,7 +57,7 @@ public class Hovedprogram {
         System.out.println("Skriv til fil");
     }
     public static void clearScreen() {  
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();  
+        //System.out.print("\033[H\033[2J");  
+        //System.out.flush();  
     }  
 }

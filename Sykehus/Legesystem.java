@@ -11,40 +11,52 @@ public class Legesystem {
     private IndeksertListe<Resept> reseptListe = new IndeksertListe<>();
     
     public void lesFraFil(String filnavn){//Samuel
+        Koe<String> linjer = new Koe<>();
         try{
             File fil = new File(filnavn);
-            Scanner scanner = new Scanner(filnavn);
-            Koe<String> linjer = new Koe<>();
+            Scanner scanner = new Scanner(fil);
             while(scanner.hasNextLine()){
                 linjer.leggTil(scanner.nextLine());
             }
+            scanner.close();
         }
-            catch(FileNotFoundException fnf){
-                System.out.println("Fil ikke funnet, venligst prøv igjen");
-                
+        catch(FileNotFoundException e){
+            System.out.println("Fil ikke funnet, venligst prøv igjen");  
+        }
+        String type = "";
+        for(String s : linjer){
+            if(s.split("#").length > 1){
+                type = s.split(" ")[1];
             }
+            String[] linje = s.split(",");
+            if(type.equals("Pasienter"));
+            if(type.equals("Resepter"));
+            if(type.equals("Leger"));
+            if(type.equals("Resepter"));
             
         }
+        
+    }
 
     public void print(){ // August
 
     }
 
-    public void leggTilLege(){// Yuki
+    public void leggTilLege(Lege lege){// Yuki
         
 
     }
 
-    public void leggTilPasient(){// Yuki
+    public void leggTilPasient(Pasient pasient){// Yuki
         
         
     }
 
-    public void leggTilLegemiddel(){// Yuki
+    public void leggTilLegemiddel(Legemiddel legemiddel){// Yuki
 
     }
 
-    public void leggTilResept(){// Yuki
+    public void leggTilResept(Resept resept){// Yuki
         
     }
 

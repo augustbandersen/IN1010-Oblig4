@@ -18,24 +18,29 @@ class Lege implements Comparable<Lege> {
     public String toString(){
         return ("Legens navn: " + legeNavn);
     }
-    
+
+    /*
     @Override
     public int compareTo(Lege lege){
         char[] lege1 = legeNavn.toLowerCase().toCharArray(); //Liste med bokstaver fra navn paa lege 1
         char[] lege2 = lege.hentLegeNavn().toLowerCase().toCharArray(); //Liste med bokstaver fra navn paa lege 2
 
-        // ["a", "u", "g", "u", "s", "t"]
-        // ["p", "e", "r"]
-
         for (int i=0; i < lege1.length; i++){
             int bokstavIndeks = 0;
             if (lege1[bokstavIndeks] == lege2[bokstavIndeks]){
             bokstavIndeks++;
+            } else if (lege1[bokstavIndeks] > lege2[bokstavIndeks]){
+
             }
 
         }
-
         return 1;
+    }
+    */
+
+    @Override
+    public int compareTo(Lege lege){
+       return 0;
     }
 
     public IndeksertListe<Resept> hentUtskrevneResepter(){
