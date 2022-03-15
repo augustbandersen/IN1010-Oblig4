@@ -39,6 +39,27 @@ public class Legesystem {
     }
 
     public void print(){ // August
+        //Oversikt over pasienter
+        System.out.println("Alle pasienter:");
+        for (int i=0; i<pasientListe.length(); i++){ //Trenger en maate aa finne lengden til listen paa
+            System.out.println(pasientListe.hent(i));
+        }
+
+        //Oversikt over leger
+        System.out.println(); // Ny linje
+
+
+        //Oversikt over legemidler
+        System.out.println(); // Ny linje
+        for (int i=0; i<legemiddelListe.length(); i++){ //Trenger en maate aa finne lengden til listen paa
+            System.out.println(legemiddelListe.hent(i));
+        }
+
+        //Oversikt over resepter
+        System.out.println(); // Ny linje
+        for (int i=0; i<reseptListe.length(); i++){ //Trenger en maate aa finne lengden til listen paa
+            System.out.println(reseptListe.hent(i));
+        }
 
     }
 
