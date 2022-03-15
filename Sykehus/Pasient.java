@@ -1,6 +1,8 @@
+package Sykehus;
+
 import Lenkeliste.*;
 
-class Pasient {
+class Pasient{
   private String navn;
   private String foedselsnr;
   static int antPasient = 0;
@@ -15,7 +17,7 @@ class Pasient {
   }
   // Legger  resept til i  stabelen.
   public void leggTilResept(Resept resept) {
-    reseptStabel.leggPaa(resept);
+    reseptStabel.leggTil(resept);
   }
   public Stabel<Resept> hentStabel() {return reseptStabel;}
   public String hentNavn() {return navn;}

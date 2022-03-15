@@ -55,7 +55,7 @@ public class Hovedprogram {
         System.out.println("Skriv til fil");
     }
     public static void clearScreen() {  
-        //System.out.print("\033[H\033[2J");  
+        System.out.print("\033[H\033[2J");  
         System.out.flush();  
     }  
 }
