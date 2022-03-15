@@ -15,13 +15,12 @@ public class Hovedprogram {
             System.out.println("    2. Legge til nytt element");
             System.out.println("    3. Skrive ut statistikk");
             System.out.println("    4. Skrive alle data til fil");
-            System.out.println("    Tast inn 'Q' for å avslutte programmet");
+            System.out.println("    Tast inn 'Q' for aa avslutte programmet");
             System.out.print("\nSkirv nummer for oensket gjoeremål: ");
             input = in.nextLine();
 
             try {
                 switch(Integer.parseInt(input)){
-
                     case 1:
                         oversikt();
                         break;
@@ -56,7 +55,7 @@ public class Hovedprogram {
         System.out.println("Skriv til fil");
     }
     public static void clearScreen() {  
-        System.out.print("\033[H\033[2J");  
+        //System.out.print("\033[H\033[2J");  
         System.out.flush();  
     }  
 }
