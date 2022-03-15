@@ -19,28 +19,30 @@ class Lege implements Comparable<Lege> {
         return ("Legens navn: " + legeNavn);
     }
 
-    /*
     @Override
+    // Hentet fra https://stackoverflow.com/questions/26553889/comparing-2-strings-by-ascii-values-in-java
     public int compareTo(Lege lege){
-        char[] lege1 = legeNavn.toLowerCase().toCharArray(); //Liste med bokstaver fra navn paa lege 1
-        char[] lege2 = lege.hentLegeNavn().toLowerCase().toCharArray(); //Liste med bokstaver fra navn paa lege 2
+        int sammenlikning = 0;
+        int s1;
+        int s2;
 
-        for (int i=0; i < lege1.length; i++){
-            int bokstavIndeks = 0;
-            if (lege1[bokstavIndeks] == lege2[bokstavIndeks]){
-            bokstavIndeks++;
-            } else if (lege1[bokstavIndeks] > lege2[bokstavIndeks]){
+        for (int i = 0; i < legeNavn.length() && i < lege.hentLegeNavn().length(); i++){
+            s1 = (int) legeNavn.toLowerCase().charAt(i);
+            s2 = (int) lege.hentLegeNavn().toLowerCase().charAt(i);
+            sammenlikning = s1-s2;
 
+            if (sammenlikning != 0){
+                return sammenlikning;
             }
-
         }
-        return 1;
-    }
-    */
-
-    @Override
-    public int compareTo(Lege lege){
-       return 0;
+        if (legeNavn.length() > lege.hentLegeNavn().length()){
+            return 1;
+        }
+        else if (legeNavn.length() < lege.hentLegeNavn().length()){
+            return -1;
+        }
+        return 0;
+    
     }
 
     public IndeksertListe<Resept> hentUtskrevneResepter(){
