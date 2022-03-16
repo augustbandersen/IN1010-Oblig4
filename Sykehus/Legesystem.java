@@ -110,19 +110,19 @@ public class Legesystem {
     }
 
     public void leggTilLege(Lege lege){// Yuki
-        System.out.println(lege);
+        legeListe.leggTil(lege);
     }
 
     public void leggTilPasient(Pasient pasient){// Yuki
-        System.out.println(pasient);   
+        pasientListe.leggTil(pasient);   
     }
 
     public void leggTilLegemiddel(Legemiddel legemiddel){// Yuki
-        System.out.println(legemiddel);
+        legemiddelListe.leggTil(legemiddel);
     }
 
     public void leggTilResept(Resept resept){// Yuki
-        System.out.println(resept);
+        reseptListe.leggTil(resept);
     }
 
     public void brukResept(){//Samuel
