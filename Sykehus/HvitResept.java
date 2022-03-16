@@ -1,5 +1,5 @@
 package Sykehus;
-class HvitResept extends Resept{
+public class HvitResept extends Resept{
     
     //Konstruktor
     public HvitResept(Legemiddel legemiddel, Lege utrskivendeLege, int pasientId, int reit){

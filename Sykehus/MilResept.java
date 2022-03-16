@@ -1,5 +1,5 @@
 package Sykehus;
-class MilResept extends HvitResept{
+public class MilResept extends HvitResept{
 
     //Konstruktor uten parameteren reit / den er satt til 3
     public MilResept(Legemiddel legemiddel, Lege utskrivendeLege, int pasientId){

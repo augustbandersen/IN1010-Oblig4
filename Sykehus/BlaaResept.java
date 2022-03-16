@@ -1,5 +1,5 @@
 package Sykehus;
-class BlaaResept extends Resept{
+public class BlaaResept extends Resept{
     
     //Konstruktor
     public BlaaResept(Legemiddel legemiddel, Lege utrskivendeLege, int pasientId, int reit){

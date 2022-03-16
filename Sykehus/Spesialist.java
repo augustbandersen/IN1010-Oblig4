@@ -1,5 +1,5 @@
 package Sykehus;
-class Spesialist extends Lege implements Godkjenningsfritak{
+public class Spesialist extends Lege implements Godkjenningsfritak{
     String kontrollId;
     
     //Konstruktor

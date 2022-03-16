@@ -2,7 +2,7 @@ package Sykehus;
 
 import Lenkeliste.*;
 
-class Pasient{
+public class Pasient{
   private String navn;
   private String foedselsnr;
   static int antPasient = 0;
