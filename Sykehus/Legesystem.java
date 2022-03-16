@@ -131,4 +131,8 @@ public class Legesystem {
     public void skrivStatistikk(){// August
 
     }
+
+    public IndeksertListe<Pasient> hentPasientListe(){
+        return this.pasientListe;
+    }
 }
