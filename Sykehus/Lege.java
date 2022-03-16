@@ -1,7 +1,7 @@
 package Sykehus;
 
 import Lenkeliste.*;
-class Lege implements Comparable<Lege> {
+public class Lege implements Comparable<Lege> {
     String legeNavn;
     IndeksertListe<Resept> utskrevneResepter = new IndeksertListe<>();
 
@@ -47,7 +47,7 @@ class Lege implements Comparable<Lege> {
         return utskrevneResepter;
     }
 
-    HvitResept skrHvitResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift{
+    HvitResept skrivHvitResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift{
         if (legemiddel instanceof Narkotisk){
             throw new UlovligUtskrift(this, legemiddel);
         }

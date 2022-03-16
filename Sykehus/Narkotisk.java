@@ -1,5 +1,5 @@
 package Sykehus;
-class Narkotisk extends Legemiddel{
+public class Narkotisk extends Legemiddel{
     private int styrke;
     private static int antall;
     private int narkotiskId;

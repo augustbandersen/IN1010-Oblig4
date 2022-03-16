@@ -6,7 +6,9 @@ import java.lang.ProcessBuilder;
 public class Hovedprogram {
     public static void main(String[] args) {
         Legesystem legesystem = new Legesystem();
-        legesystem.lesFraFil("legedata.txt");
+        try{
+            legesystem.lesFraFil("legedata.txt");
+        }catch(Exception e){System.out.println(e);}
         Scanner in = new Scanner(System.in);
         String input;
         Boolean run = true;
@@ -18,7 +20,7 @@ public class Hovedprogram {
             System.out.println("    3. Skrive ut statistikk");
             System.out.println("    4. Skrive alle data til fil");
             System.out.println("    Tast inn 'Q' for aa avslutte programmet");
-            System.out.print("\nSkirv nummer for oensket gjoeremål: ");
+            System.out.print("\nSkirv nummer for oensket gjoeremaal: ");
             input = in.nextLine();
 
             try {
@@ -39,7 +41,7 @@ public class Hovedprogram {
             } catch (NumberFormatException nfe) {
                 if(input.equalsIgnoreCase("q")) break;
                 System.out.flush();
-                System.out.println("Ugyldig input, venligst prøv igjen");
+                System.out.println("Ugyldig input, venligst proev igjen");
             }
 
         }
