@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import Lenkeliste.*;
+import java.io.FileWriter;
 
 public class Legesystem { 
     private IndeksertListe<Pasient> pasientListe = new IndeksertListe<>();
@@ -79,7 +80,7 @@ public class Legesystem {
                         if(p.hentId() == pasientId) pasient = p;
                     }if(pasient == null) throw new Exception("Ingen pasient med riktig ID");
                     
-                    if(linje.length == 5) reit = Integer.parseInt(linje[5]);
+                    if(linje.length == 5) reit = Integer.parseInt(linje[4]);
 
                     if(resepttype.equals("hvit")){
                         resept = lege.skrivHvitResept(legemiddel, pasient, reit);
@@ -93,7 +94,8 @@ public class Legesystem {
                     if(resepttype.equals("p")){
                         resept = lege.skrivPResept(legemiddel, pasient, reit);
                     }
-                    leggTilResept(resept);
+                    leggTilResept(resept); System.out.println("resept");
+                    pasient.leggTilResept(resept);
                 }
             }
             scanner.close();
@@ -104,34 +106,44 @@ public class Legesystem {
         
     }
 
-    public void oversikt(){ // August
+    public void oversikt(Scanner scanner){ // August
         //Oversikt over pasienter
+        System.out.println(); //Ny linje
         System.out.println("Alle pasienter:");
         for (Pasient p : pasientListe) {
-            System.out.println(p);
+            System.out.println(p + ", Id: " + p.hentId());
         }
 
         //Oversikt over leger
         System.out.println(); // Ny linje
+        System.out.println("Alle leger:");
         for (Lege l : legeListe) {
             if (l instanceof Spesialist){
                 System.out.println(l + ", Spesialist");
+            } else{
+                System.out.println(l + ", vanlig");
             }
-            System.out.println(l + ", vanlig");
-
         }
 
         //Oversikt over legemidler
         System.out.println(); // Ny linje
+        System.out.println("Alle legemidler:");
         for (Legemiddel l : legemiddelListe) {
             System.out.println(l);
         }
 
         //Oversikt over resepter
         System.out.println(); // Ny linje
+        System.out.println("Alle resepter: ");
         for (Resept r : reseptListe) {
             System.out.println(r);
+            
         }
+
+        System.out.println();
+        System.out.print("Trykk Enter for aa returnere til hovedmeny");
+        scanner.nextLine();
+        System.out.println();
 
     }
 
@@ -150,11 +162,7 @@ public class Legesystem {
     public void leggTilResept(Resept resept){// Yuki
         reseptListe.leggTil(resept);
     }
-
-    public void brukResept(){//Samuel
-
-    }
-    public void skrivStatistikk(){// August
+    public void skrivStatistikk(Scanner scanner){// August
         //Antall utskrevene resepter paa vanedannende og narkotiske legemidler
         int antVane = 0; 
         int antNarko = 0;
@@ -170,7 +178,7 @@ public class Legesystem {
 
 
         //Leger som har skrevet ut minst en resept paa narkotiske legemidler, og antallet resepter per lege
-        IndeksertListe<String[]> narkoLeger = new IndeksertListe<>(); //Sortert i alfabetisk rekkefolge?
+        IndeksertListe<String> narkoLeger = new IndeksertListe<>(); //Sortert i alfabetisk rekkefolge?
         for (Lege l : legeListe){
             int antNarkoResPerLege = 0;
             for (Resept r : l.hentUtskrevneResepter()){
@@ -178,22 +186,27 @@ public class Legesystem {
                     antNarkoResPerLege++;
                 }
             }
-            String[] tmp = {l.hentLegeNavn() + " | Antall respter utskrevet: " + antNarkoResPerLege};
-            narkoLeger.leggTil(tmp);
+
+            if (antNarkoResPerLege != 0){
+                String tmp = l.hentLegeNavn() + " | Antall respter utskrevet: " + antNarkoResPerLege;
+                narkoLeger.leggTil(tmp);
+            }
         }
 
 
         //Pasienter som har minst en gyldig resept paa narkotiske legemidler, og antallet resepter per pasient
-        IndeksertListe<String[]> narkoPasienter = new IndeksertListe<>();
+        IndeksertListe<String> narkoPasienter = new IndeksertListe<>();
         for (Pasient p : pasientListe){
             int antNarkoResPerPasient = 0;
-            for (Resept r : p.hentStabel()){
+            for (Resept r : p.hentReseptListe()){
                 if (r.hentLegemiddel() instanceof Narkotisk){
                     antNarkoResPerPasient++;
                 }
             }
-            String[] tmp = {p.hentNavn() + " | Antall respter: " + antNarkoResPerPasient};
-            narkoPasienter.leggTil(tmp);
+            if (antNarkoResPerPasient != 0){
+                String tmp = p.hentNavn() + " | Antall respter: " + antNarkoResPerPasient;
+                narkoPasienter.leggTil(tmp);
+            }
         }
 
 
@@ -202,14 +215,48 @@ public class Legesystem {
 
         System.out.println();
         System.out.println("Leger som har skrevet ut resepter paa narkotiske legemidler:");
-        System.out.println(narkoLeger);
+        for (String s : narkoLeger){
+            System.out.println(s);
+        }
 
         System.out.println();
         System.out.println("Pasienter som har gyldig resept paa narkotiske legemidler:");
-        System.out.println(narkoPasienter);
+        for (String s : narkoPasienter){
+            System.out.println(s);
+        }
+
+        System.out.print("Trykk Enter for aa returnere til hovedmeny");
+        scanner.nextLine();
     }
 
     public IndeksertListe<Pasient> hentPasientListe(){
         return this.pasientListe;
+    }
+
+    public void skrivTilFil(String filnavn){
+        //Lage fil
+        try {
+            File minFil = new File(filnavn);
+
+            
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+
+
+        try {
+            FileWriter skriver = new FileWriter(filnavn);
+            skriver.write("# Pasienter (navn, fnr)\n");
+            skriver.write(pasientListe.toString());
+            skriver.write("# Legemidler (navn,type,pris,virkestoff,[styrke])\n");
+            skriver.write("");
+            skriver.write("# Leger (navn,kontrollid / 0 hvis vanlig lege)\n");
+
+            skriver.write("# Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])\n")
+
+            
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
     }
 }

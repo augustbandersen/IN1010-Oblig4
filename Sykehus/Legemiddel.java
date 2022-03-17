@@ -3,15 +3,22 @@ abstract class Legemiddel {
     protected String navn;
     protected int pris;
     protected double virkestoff;
+    protected static int idCounter = 0;
+    protected int id;
 
     //Konstruktor
     public Legemiddel(String navn, int pris, double virkestoff){
         this.navn = navn;
         this.pris = pris;
         this.virkestoff = virkestoff;
+        Legemiddel.idCounter ++;
+        this.id = Legemiddel.idCounter;
+        
     }
 
-    public abstract int hentId();
+    public int hentId(){
+        return id;
+    }
 
     public String hentNavn(){
         return navn;

@@ -1,5 +1,5 @@
 package Sykehus;
-abstract class Resept {
+public abstract class Resept {
     private int reseptId;
     private static int antall;
     protected Legemiddel legemiddel;
@@ -53,6 +53,6 @@ abstract class Resept {
 
     @Override
     public String toString() {
-        return("Legemiddel: " + legemiddel + ", Lege: " + utskrivendeLege + ", PasientId: " + pasientId + ", Reit: " + reit);
+        return("--------------------\n" + "Legemiddel: " + legemiddel.hentNavn() + "\nLege: " + utskrivendeLege.hentLegeNavn() + "\nPasientId: " + pasientId + "\nReit: " + reit);
       }
 }

@@ -9,7 +9,7 @@ public class Hovedprogram {
         
         try{
             legesystem.lesFraFil(new File("legedata.txt"));
-        }catch(Exception e){System.out.println("exception" + e);}
+        }catch(Exception e){System.out.println("exception " + e);}
         
         Scanner scanner = new Scanner(System.in);
         while(true){
@@ -39,14 +39,27 @@ public class Hovedprogram {
         System.out.println("Hvilken pasient vil du se resept for?");
         System.out.println(legesystem.hentPasientListe());
         for(int i = 0; i < pasientliste.stoerrelse(); i++){
-            System.out.println(i + ".   " + pasientliste.hent(i));
+            System.out.println(i + ".    " + pasientliste.hent(i));
         }
         System.out.println("Tast inn 'b' for aa returnere til hovedmenyen");
         System.out.print("> ");
         String input = scanner.nextLine();
         try{
             Pasient pasient = pasientliste.hent(Integer.parseInt(input));
-            
+            clearScreen();
+            IndeksertListe<Resept> resepter = pasient.hentReseptListe();
+            System.out.println("Velg resept du vil bruke:\n");
+            System.out.println("Reseptene til " + pasient.hentNavn());
+            for(int i = 0; i < resepter.stoerrelse(); i++){
+                System.out.println(i + ".\n" + resepter.hent(i));
+            }
+            System.out.println("");
+            input = scanner.nextLine();
+            Resept resept = resepter.hent(Integer.parseInt(input));
+            resept.bruk();
+            System.out.println("Resept brukt, reit er naa: " + resept.hentReit());
+            System.out.print("\nTast enter for aa returnere til hovedmenyen");
+            scanner.nextLine();
 
         }catch(Exception e){
             if(input.equalsIgnoreCase("b")){
@@ -75,13 +88,15 @@ public class Hovedprogram {
         try {
             switch(Integer.parseInt(input)){
                 case 1:
-                    legesystem.oversikt();
+                    legesystem.oversikt(scanner);
+                    clearScreen();
                     break;
                 case 2:
                     leggTil(scanner);
                     break;
                 case 3:
-                    legesystem.skrivStatistikk();
+                    legesystem.skrivStatistikk(scanner);
+                    clearScreen();
                     break;
                 case 4:
                     skrivTilFil();
@@ -90,6 +105,9 @@ public class Hovedprogram {
                     while(true){
                         if(!brukResept(scanner))break;
                     }
+                    break;
+                case 6:
+                    skrivTilFil(scanner);
                     break;
             }
         } catch (NumberFormatException nfe) {
@@ -104,4 +122,9 @@ public class Hovedprogram {
         //System.out.print("\033[H\033[2J");  
         //System.out.flush();  
     }  
+    public static void skrivTilFil(Scanner scanner){
+        legesystem.skrivTilFil("");
+    }
 }
+
+
