@@ -14,7 +14,7 @@ Dr. Wilson,0
 Dr. House,12345
 Dr. Hillestad Lovold,98765
 # Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])
-2,Dr. Cox,2,hvit,7
+2,Dr. Cox,2,hvit,1
 1,Dr. Hillestad Lovold,3,blaa,1000
 3,Dr. House,1,militaer
 4,Dr. Hillestad Lovold,3,p,25

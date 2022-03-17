@@ -166,6 +166,7 @@ public class Legesystem {
         //Antall utskrevene resepter paa vanedannende og narkotiske legemidler
         int antVane = 0; 
         int antNarko = 0;
+        
         for (Lege l : legeListe){
             for (Resept r : l.hentUtskrevneResepter()){ 
                 if (r.hentLegemiddel() instanceof Vanedannende){
@@ -252,7 +253,7 @@ public class Legesystem {
             skriver.write("");
             skriver.write("# Leger (navn,kontrollid / 0 hvis vanlig lege)\n");
 
-            skriver.write("# Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])\n")
+            skriver.write("# Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])\n");
 
             
         } catch (Exception e) {

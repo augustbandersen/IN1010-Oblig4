@@ -49,15 +49,23 @@ public class Hovedprogram {
             clearScreen();
             IndeksertListe<Resept> resepter = pasient.hentReseptListe();
             System.out.println("Velg resept du vil bruke:\n");
-            System.out.println("Reseptene til " + pasient.hentNavn());
-            for(int i = 0; i < resepter.stoerrelse(); i++){
-                System.out.println(i + ".\n" + resepter.hent(i));
+            System.out.println("Reseptene til " + pasient.hentNavn() + ":");
+            if(resepter.stoerrelse() < 1){
+                System.out.println("\nIngen resepter aa vise");
             }
-            System.out.println("");
-            input = scanner.nextLine();
-            Resept resept = resepter.hent(Integer.parseInt(input));
-            resept.bruk();
-            System.out.println("Resept brukt, reit er naa: " + resept.hentReit());
+            else{
+                for(int i = 0; i < resepter.stoerrelse(); i++){
+                    System.out.println(i + ".\n" + resepter.hent(i));
+                }
+                System.out.println("");
+                input = scanner.nextLine();
+                Resept resept = resepter.hent(Integer.parseInt(input));
+                resept.bruk();
+                if(resept.hentReit() == 0){
+                    resepter.fjern(Integer.parseInt(input));
+                }
+                System.out.println("Resept brukt, reit er naa: " + resept.hentReit());
+            }
             System.out.print("\nTast enter for aa returnere til hovedmenyen");
             scanner.nextLine();
 
@@ -88,6 +96,7 @@ public class Hovedprogram {
         try {
             switch(Integer.parseInt(input)){
                 case 1:
+                    clearScreen();
                     legesystem.oversikt(scanner);
                     clearScreen();
                     break;
@@ -95,6 +104,7 @@ public class Hovedprogram {
                     leggTil(scanner);
                     break;
                 case 3:
+                    clearScreen();
                     legesystem.skrivStatistikk(scanner);
                     clearScreen();
                     break;
@@ -119,8 +129,8 @@ public class Hovedprogram {
         return run;
     }
     public static void clearScreen() {  
-        //System.out.print("\033[H\033[2J");  
-        //System.out.flush();  
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
     }  
     public static void skrivTilFil(Scanner scanner){
         legesystem.skrivTilFil("");
