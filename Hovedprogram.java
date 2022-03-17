@@ -61,7 +61,7 @@ public class Hovedprogram {
                 Lege nyLege = new Lege(navn);
                 legesystem.leggTilLege(nyLege);
             }
-            System.out.println("Legen er blitt lagret! Tast enter for å returnere til hovedmenyen.");
+            System.out.println("Legen er blitt lagret! Tast enter for aa returnere til hovedmenyen.");
             lege.nextLine();
         }
         public static void addPasient(Scanner pasient){
