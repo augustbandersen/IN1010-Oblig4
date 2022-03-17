@@ -1,0 +1,36 @@
+# Pasienter (navn, fnr)
+Jens Hans Olsen,11111143521
+Petrolina Swiq,24120099343
+Sven Svendsen,10111224244
+Juni Olsen,21049563451
+# Legemidler (navn,type,pris,virkestoff,[styrke])
+Navn: Predizol, Pris: 450, Virkestoff: 75.0, Narkotisk styrke: 8 Id: 1
+Navn: Paralgin Forte, Pris: 65, Virkestoff: 400.0, Vanedannende styrke: 5, Id: 2
+Navn: Placebo Pianissimo, Pris: 10, Virkestoff: 0.0, Id: 3
+Navn: Ibux, Pris: 240, Virkestoff: 200.0, Id: 4
+# Leger (navn,kontrollid / 0 hvis vanlig lege)
+Legens navn: Dr. Cox, kontrollId: 0 
+Legens navn: Dr. Hillestad Lovold, kontrollId: 98765
+Legens navn: Dr. House, kontrollId: 12345
+Legens navn: Dr. Wilson
+# Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])
+--------------------
+Legemiddel: Paralgin Forte
+Lege: Dr. Cox
+PasientId: 2
+Reit: 1
+--------------------
+Legemiddel: Predizol
+Lege: Dr. Hillestad Lovold
+PasientId: 3
+Reit: 1000
+--------------------
+Legemiddel: Placebo Pianissimo
+Lege: Dr. House
+PasientId: 1
+Reit: 3
+--------------------
+Legemiddel: Ibux
+Lege: Dr. Hillestad Lovold
+PasientId: 3
+Reit: 25

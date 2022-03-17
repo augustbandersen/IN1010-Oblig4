@@ -109,7 +109,8 @@ public class Hovedprogram {
                     clearScreen();
                     break;
                 case 4:
-                    skrivTilFil();
+                    System.out.println("Skriv inn filnavn du vil skrive til: ");
+                    skrivTilFil(scanner);
                     break;
                 case 5:
                     while(true){
@@ -133,7 +134,7 @@ public class Hovedprogram {
         System.out.flush();  
     }  
     public static void skrivTilFil(Scanner scanner){
-        legesystem.skrivTilFil("");
+        legesystem.skrivTilFil(scanner);
     }
 }
 

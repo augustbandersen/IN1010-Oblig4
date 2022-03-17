@@ -234,9 +234,10 @@ public class Legesystem {
         return this.pasientListe;
     }
 
-    public void skrivTilFil(String filnavn){
+    public void skrivTilFil(Scanner scanner){
+        String filNavn = scanner.nextLine();
         try { //Lage ny fil
-            File minFil = new File(filnavn);
+            File minFil = new File(filNavn);
             if (minFil.createNewFile()){
                 System.out.println("Ny fil opprettet: " + minFil.getName());
             } else {
@@ -249,8 +250,8 @@ public class Legesystem {
 
 
         try { //Skrive til fil
-            FileWriter skriver = new FileWriter(filnavn);
-            System.out.println("Prover aa skrive til filen: " + filnavn);
+            FileWriter skriver = new FileWriter(filNavn);
+            System.out.println("Prover aa skrive til filen: " + filNavn);
 
             skriver.write("# Pasienter (navn, fnr)\n");
             skriver.write(pasientListe.finereStreng());
@@ -261,10 +262,13 @@ public class Legesystem {
             skriver.write("# Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])\n");
             skriver.write(reseptListe.finereStreng());
 
-            System.out.println("Skriving til filen: " + filnavn + " vellykket.");
+            System.out.println("Skriving til filen: " + filNavn + ", vellykket.");
             skriver.close();
         } catch (Exception e) { //Hvis skriving til fil feiler
-            System.out.println("Skriving til filen: " + filnavn + " feilet.");
+            System.out.println("Skriving til filen: '" + filNavn + "' feilet.");
         }
+
+        System.out.print("Trykk Enter for aa returnere til hovedmeny");
+        scanner.nextLine();
     }
 }
