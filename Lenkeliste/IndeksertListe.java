@@ -44,4 +44,18 @@ public class IndeksertListe<T> extends Lenkeliste<T> {
         }
         return node;
     }
+
+    //Metode for aa lage en finere streng. (Uten [])
+    public String finereStreng(){
+        String streng = "";
+        Node node = foersteNode;
+        while (node != null){
+            if (node.objekt == null){
+                streng += "null"+"\n";
+            }
+            streng += node + "\n";
+            node = node.neste;
+        }
+        return streng;
+    }
 }
