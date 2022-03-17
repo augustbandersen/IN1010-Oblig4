@@ -104,7 +104,7 @@ public class Legesystem {
         
     }
 
-    public void print(){ // August
+    public void oversikt(){ // August
         //Oversikt over pasienter
         System.out.println("Alle pasienter:");
         for (Pasient p : pasientListe) {

@@ -11,16 +11,20 @@ public class Hovedprogram {
             legesystem.lesFraFil(new File("legedata.txt"));
         }catch(Exception e){System.out.println("exception" + e);}
         
-        Scanner in = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         while(true){
-            if(!hovedmeny(in)) break;
+            if(!hovedmeny(scanner)) break;
         }
-        //in.close();
+        scanner.close();
     }
     public static void oversikt(){
         System.out.println("Oversikt");
     }
-    public static void leggTil(){
+    public static void leggTil(Scanner in){ // Yuki
+
+
+
+
         System.out.println("Legg til");
     }
     public static void statistikk(){
@@ -42,8 +46,10 @@ public class Hovedprogram {
         String input = scanner.nextLine();
         try{
             Pasient pasient = pasientliste.hent(Integer.parseInt(input));
+            
+
         }catch(Exception e){
-            if(input.equalsIgnoreCase("q")){
+            if(input.equalsIgnoreCase("b")){
                 return false;
             }
             System.out.println("ugyldig input, venligst prøv igjen");
@@ -69,13 +75,13 @@ public class Hovedprogram {
         try {
             switch(Integer.parseInt(input)){
                 case 1:
-                    oversikt();
+                    legesystem.oversikt();
                     break;
                 case 2:
-                    leggTil();
+                    leggTil(scanner);
                     break;
                 case 3:
-                    statistikk();
+                    legesystem.skrivStatistikk();
                     break;
                 case 4:
                     skrivTilFil();
