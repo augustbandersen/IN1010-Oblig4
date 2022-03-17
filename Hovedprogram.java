@@ -54,7 +54,6 @@ public class Hovedprogram {
             if(legeValg.equals("1")) {
                 System.out.println("Tast inn kontrollId ");
                 String kontrollId = lege.nextLine();
-                lege.nextLine();
                 Lege nyLege = new Spesialist(navn, kontrollId);
                 legesystem.leggTilLege(nyLege);
         
@@ -62,7 +61,8 @@ public class Hovedprogram {
                 Lege nyLege = new Lege(navn);
                 legesystem.leggTilLege(nyLege);
             }
-            System.out.println("Legen er blitt lagret!");
+            System.out.println("Legen er blitt lagret! Tast enter for å returnere til hovedmenyen.");
+            lege.nextLine();
         }
         public static void addPasient(Scanner pasient){
         
