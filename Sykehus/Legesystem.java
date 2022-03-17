@@ -105,6 +105,33 @@ public class Legesystem {
     }
 
     public void print(){ // August
+        //Oversikt over pasienter
+        System.out.println("Alle pasienter:");
+        for (Pasient p : pasientListe) {
+            System.out.println(p);
+        }
+
+        //Oversikt over leger
+        System.out.println(); // Ny linje
+        for (Lege l : legeListe) {
+            if (l instanceof Spesialist){
+                System.out.println(l + ", Spesialist");
+            }
+            System.out.println(l + ", vanlig");
+
+        }
+
+        //Oversikt over legemidler
+        System.out.println(); // Ny linje
+        for (Legemiddel l : legemiddelListe) {
+            System.out.println(l);
+        }
+
+        //Oversikt over resepter
+        System.out.println(); // Ny linje
+        for (Resept r : reseptListe) {
+            System.out.println(r);
+        }
 
     }
 
@@ -128,7 +155,58 @@ public class Legesystem {
 
     }
     public void skrivStatistikk(){// August
+        //Antall utskrevene resepter paa vanedannende og narkotiske legemidler
+        int antVane = 0; 
+        int antNarko = 0;
+        for (Lege l : legeListe){
+            for (Resept r : l.hentUtskrevneResepter()){ 
+                if (r.hentLegemiddel() instanceof Vanedannende){
+                    antVane++;
+                } else if (r.hentLegemiddel() instanceof Narkotisk){
+                    antNarko++;
+                }
+            }
+        }
 
+
+        //Leger som har skrevet ut minst en resept paa narkotiske legemidler, og antallet resepter per lege
+        IndeksertListe<String[]> narkoLeger = new IndeksertListe<>(); //Sortert i alfabetisk rekkefolge?
+        for (Lege l : legeListe){
+            int antNarkoResPerLege = 0;
+            for (Resept r : l.hentUtskrevneResepter()){
+                if (r.hentLegemiddel() instanceof Narkotisk){
+                    antNarkoResPerLege++;
+                }
+            }
+            String[] tmp = {l.hentLegeNavn() + " | Antall respter utskrevet: " + antNarkoResPerLege};
+            narkoLeger.leggTil(tmp);
+        }
+
+
+        //Pasienter som har minst en gyldig resept paa narkotiske legemidler, og antallet resepter per pasient
+        IndeksertListe<String[]> narkoPasienter = new IndeksertListe<>();
+        for (Pasient p : pasientListe){
+            int antNarkoResPerPasient = 0;
+            for (Resept r : p.hentStabel()){
+                if (r.hentLegemiddel() instanceof Narkotisk){
+                    antNarkoResPerPasient++;
+                }
+            }
+            String[] tmp = {p.hentNavn() + " | Antall respter: " + antNarkoResPerPasient};
+            narkoPasienter.leggTil(tmp);
+        }
+
+
+        System.out.println("Antall resepter for vanedannende legemidler: " + antVane);
+        System.out.println("Antall resepter for narkotiske legemidler: " + antNarko);
+
+        System.out.println();
+        System.out.println("Leger som har skrevet ut resepter paa narkotiske legemidler:");
+        System.out.println(narkoLeger);
+
+        System.out.println();
+        System.out.println("Pasienter som har gyldig resept paa narkotiske legemidler:");
+        System.out.println(narkoPasienter);
     }
 
     public IndeksertListe<Pasient> hentPasientListe(){
