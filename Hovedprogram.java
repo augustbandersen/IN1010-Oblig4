@@ -84,9 +84,6 @@ public class Hovedprogram {
             System.out.println("\t- Vanlig: tast \"c\"");
         
             String nyInput = tastatur.nextLine();
-        
-        
-        
             if (nyInput.equals("a")) {
                 System.out.println("Navnet til leggemiddel: ");
                 String navn = tastatur.nextLine();
@@ -153,13 +150,13 @@ public class Hovedprogram {
         }   
         public static void addResept(Scanner scanner){
         
-            if (pasientListe.hasNext().equals(false)) {
+            if (legesystem.hentPasientListe().hasNext().equals(false)) {
                 System.out.println("Resept kan ikke oprettes.");
                 return;
             }
         
             System.out.println("Hvilken pasient skal utskrives en resept til?");
-            for (Pasient pasient : pasientListe) {
+            for (Pasient pasient : legesystem.hentPasientListe()) {
                 System.out.println(pasient.hentId() + ": " + pasient.toString());
             }
         
@@ -167,7 +164,7 @@ public class Hovedprogram {
             int pasientensId = scanner.nextInt();
             scanner.nextLine();
         
-            for (Pasient p : pasientListe) {
+            for (Pasient p : legesystem.hentPasientListe()) {
                 if (p.hentId() == pasientensId) {
                     pasient = p;
         
@@ -177,20 +174,20 @@ public class Hovedprogram {
                 }
             }
         
-            if (legeListe.hasNext().equals(false)) {
+            if (legesystem.hentLegeListe().hasNext().equals(false)) {
                 System.out.println("Resept kan ikke oprettes.");
                 return;
             }
         
             System.out.println("Hvilken lege skriver ut resepten? ");
-            for (Lege lege : legeListe) {
+            for (Lege lege : legesystem.hentLegeListe()) {
                 System.out.println(lege.toString());
             }
             Lege lege = null;
             String legensNavn = scanner.nextLine();
         
-            for (Lege l : legeListe) {
-                if (l.hentNavn().equalsIgnoreCase(legensNavn)) {
+            for (Lege l : legesystem.hentLegeListe()) {
+                if (l.hentLegeNavn().equalsIgnoreCase(legensNavn)) {
                     lege = l;
         
                 } else {
@@ -198,19 +195,19 @@ public class Hovedprogram {
                 }
             }
         
-            if (legemiddelListe.hasNext()) {
+            if (legesystem.hentLegeListe().hasNext()) {
                 System.out.println("Resept kan ikke oprettes.");
                 return;
             }
         
             System.out.println("Hvilket legemiddel skal brukes?");
-            for (Legemiddel legemiddel : legemiddeListe) {
+            for (Legemiddel legemiddel : legesystem.hentLegemiddelListe()) {
                 System.out.println(legemiddel.toString());
             }
             Legemiddel legemiddel = null;
             String legemiddelNavn = scanner.nextLine();
         
-            for (Legemiddel lm : legemiddelListe) {
+            for (Legemiddel lm : legesystem.hentLegemiddelListe()) {
                 if (lm.hentNavn().equalsIgnoreCase(legemiddelNavn)) {
                     legemiddel = lm;
         
@@ -232,15 +229,13 @@ public class Hovedprogram {
             String in = scanner.nextLine();
         
             if(in.equals("b")) {
-                BlaaResept bResept = new BlaaResept(legemiddel, lege, pasient, reit);
-                lege.skrivBlaaResept(bResept);
+                BlaaResept bResept = lege.skrivBlaaResept(legemiddel, pasient, reit);
                 pasient.leggTilResept(bResept);
                 legesystem.leggTilResept(bResept);
                 System.out.println("Resepten ber lagret!");
         
             } else if (in.equals("p")) {
-                Resept pResept = new PResept(legemiddel, lege, pasient, reit);
-                lege.skrivPResept(pResept);
+                PResept pReseptlege.skrivPResept(legemiddel, pasient, reit);
                 pasient.leggTilResept(pResept);
                 legesystem.leggTilResept(pResept);
                 System.out.println("Resepten er lagret!");

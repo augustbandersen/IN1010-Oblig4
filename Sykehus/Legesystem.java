@@ -260,4 +260,13 @@ public class Legesystem {
             //TODO: handle exception
         }
     }
+    public Prioritetskoe<Lege> hentLegeListe(){
+        return this.legeListe;
+    }
+    public IndeksertListe<Resept> hentReseptListe(){
+        return this.reseptListe;
+    }
+    public IndeksertListe<Legemiddel> hentLegemiddelListe(){
+        return this.legemiddelListe;
+    }
 }

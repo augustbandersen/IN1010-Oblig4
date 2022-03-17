@@ -49,7 +49,7 @@ public class Lege implements Comparable<Lege> {
         return utskrevneResepter;
     }
 
-    HvitResept skrivHvitResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift{
+    public HvitResept skrivHvitResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift{
         if (legemiddel instanceof Narkotisk){
             throw new UlovligUtskrift(this, legemiddel);
         }
@@ -59,7 +59,7 @@ public class Lege implements Comparable<Lege> {
         return hvitResept;
     }
 
-    MilResept skrivMilResept (Legemiddel legemiddel, Pasient pasient) throws UlovligUtskrift{
+    public MilResept skrivMilResept (Legemiddel legemiddel, Pasient pasient) throws UlovligUtskrift{
         if (legemiddel instanceof Narkotisk){
             throw new UlovligUtskrift(this, legemiddel);
         }
@@ -69,7 +69,7 @@ public class Lege implements Comparable<Lege> {
         return milResept;
     }
 
-    PResept skrivPResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift{  
+    public PResept skrivPResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift{  
         if (legemiddel instanceof Narkotisk){
             throw new UlovligUtskrift(this, legemiddel);
         }
@@ -79,7 +79,7 @@ public class Lege implements Comparable<Lege> {
         return pResept;
     }
 
-    BlaaResept skrivBlaaResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift{  
+    public BlaaResept skrivBlaaResept(Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift{  
         if (!(this instanceof Spesialist) && (legemiddel instanceof Narkotisk)){
             throw new UlovligUtskrift(this, legemiddel);
         }
