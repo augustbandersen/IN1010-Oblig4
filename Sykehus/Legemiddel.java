@@ -1,5 +1,5 @@
 package Sykehus;
-abstract class Legemiddel {
+public abstract class Legemiddel {
     protected String navn;
     protected int pris;
     protected double virkestoff;

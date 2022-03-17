@@ -1,5 +1,5 @@
 package Sykehus;
-class Vanedannende extends Legemiddel{
+public class Vanedannende extends Legemiddel{
     private int styrke;
 
     //Konstruktor

@@ -149,12 +149,12 @@ public class Hovedprogram {
             }
         }   
         public static void addResept(Scanner scanner){
-        
+        /*
             if (legesystem.hentPasientListe().hasNext().equals(false)) {
                 System.out.println("Resept kan ikke oprettes.");
                 return;
             }
-        
+        */
             System.out.println("Hvilken pasient skal utskrives en resept til?");
             for (Pasient pasient : legesystem.hentPasientListe()) {
                 System.out.println(pasient.hentId() + ": " + pasient.toString());
@@ -173,12 +173,12 @@ public class Hovedprogram {
                     return;
                 }
             }
-        
+        /*
             if (legesystem.hentLegeListe().hasNext().equals(false)) {
                 System.out.println("Resept kan ikke oprettes.");
                 return;
             }
-        
+        */
             System.out.println("Hvilken lege skriver ut resepten? ");
             for (Lege lege : legesystem.hentLegeListe()) {
                 System.out.println(lege.toString());
@@ -194,12 +194,12 @@ public class Hovedprogram {
                     System.out.println("Legen finnes ikke.");
                 }
             }
-        
+        /*
             if (legesystem.hentLegeListe().hasNext()) {
                 System.out.println("Resept kan ikke oprettes.");
                 return;
             }
-        
+        */
             System.out.println("Hvilket legemiddel skal brukes?");
             for (Legemiddel legemiddel : legesystem.hentLegemiddelListe()) {
                 System.out.println(legemiddel.toString());
@@ -229,26 +229,38 @@ public class Hovedprogram {
             String in = scanner.nextLine();
         
             if(in.equals("b")) {
-                BlaaResept bResept = lege.skrivBlaaResept(legemiddel, pasient, reit);
-                pasient.leggTilResept(bResept);
-                legesystem.leggTilResept(bResept);
-                System.out.println("Resepten ber lagret!");
+                try{
+                    Resept bResept = lege.skrivBlaaResept(legemiddel, pasient, reit);
+                    pasient.leggTilResept(bResept);
+                    legesystem.leggTilResept(bResept);
+                    System.out.println("Resepten ber lagret!");
+                }catch(UlovligUtskrift uu){System.out.println(uu);}
+                
         
             } else if (in.equals("p")) {
-                PResept pReseptlege.skrivPResept(legemiddel, pasient, reit);
-                pasient.leggTilResept(pResept);
-                legesystem.leggTilResept(pResept);
-                System.out.println("Resepten er lagret!");
+                Resept pResept;
+                try {
+                    pResept = lege.skrivPResept(legemiddel, pasient, reit);
+                    pasient.leggTilResept(pResept);
+                    legesystem.leggTilResept(pResept);
+                    System.out.println("Resepten er lagret!");
+                } catch (UlovligUtskrift e) {
+                    e.printStackTrace();
+                }
         
             } else if (in.equals("m")) {
-                Resept mResept = new MilResept(legemiddel, lege, pasient, reit);
-                lege.skrivMilResept(mResept);
-                pasient.leggTilResept(mResept);
-                legesystem.leggTilResept(mResept);
+                Resept mResept;
+                try {
+                    mResept = lege.skrivMilResept(legemiddel, pasient);
+                    pasient.leggTilResept(mResept);
+                    legesystem.leggTilResept(mResept);
                 System.out.println("Resepten er lagret!");
+                } catch (UlovligUtskrift e) {
+                    e.printStackTrace();
+                }
         
             } else {
-                System.out.println("Feil bokstav");
+                System.out.println("Ugyldig input, venligst prøv igen");
             }
         }
     public static void statistikk(){
