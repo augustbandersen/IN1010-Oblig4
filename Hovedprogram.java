@@ -21,12 +21,241 @@ public class Hovedprogram {
         System.out.println("Oversikt");
     }
     public static void leggTil(Scanner in){ // Yuki
-
-
-
-
-        System.out.println("Legg til");
-    }
+        System.out.println("Ønkser du å legge til:\n\t- Lege, tast \"1\"");
+            System.out.println("\t- Pasient, tast \"2\"\n\t- Legemiddel, tast \"3\"");
+            System.out.println("\t- Resept, tast \"4\"");
+            String nyValg = in.nextLine();
+        
+            if (nyValg.equals("1")) {
+                addLege(in);
+        
+            } else if (nyValg.equals("2")) {
+                addPasient(in);
+        
+            } else if (nyValg.equals("3")) {
+                addLegemiddel(in);
+        
+            } else if (nyValg.equals("4")) {
+                addResept(in);
+        
+            } else {
+                System.out.println("Ugyldig valg, prov igjen.");
+            }
+        }
+        public static void addLege(Scanner lege){
+            System.out.println("Hva er legens navn? ");
+            String navn = lege.nextLine();
+            System.out.println("Er legen en spesialist?");
+            System.out.println("\t- Ja: tast \"1\"");
+            System.out.println("\t- Nei: tast \"2\"");
+        
+            String legeValg = lege.nextLine();
+        
+            if(legeValg.equals("1")) {
+                System.out.println("Tast inn kontrollId ");
+                String kontrollId = lege.nextLine();
+                lege.nextLine();
+                Lege nyLege = new Spesialist(navn, kontrollId);
+                legesystem.leggTilLege(nyLege);
+        
+            } else if(legeValg.equals("2")) {
+                Lege nyLege = new Lege(navn);
+                legesystem.leggTilLege(nyLege);
+            }
+            System.out.println("Legen er blitt lagret!");
+        }
+        public static void addPasient(Scanner pasient){
+        
+            System.out.println("Hva er pasientens navn? ");
+            String navn = pasient.nextLine();
+        
+            System.out.println("Hva er pasientens fodselsnummer? ");
+            String fnr = pasient.nextLine();
+            pasient.nextLine();
+        
+            Pasient nyPasient = new Pasient (navn, fnr);
+            legesystem.leggTilPasient(nyPasient);
+            System.out.println("Pasienten ble lagret!");
+        }
+        public static void addLegemiddel(Scanner tastatur){
+            System.out.println("Hva slags type legemiddel er det?");
+            System.out.println("Er det:\n\t- Narkotisk: tast \"a\"");
+            System.out.println("\t- Vanedannende: tast \"b\"");
+            System.out.println("\t- Vanlig: tast \"c\"");
+        
+            String nyInput = tastatur.nextLine();
+        
+        
+        
+            if (nyInput.equals("a")) {
+                System.out.println("Navnet til leggemiddel: ");
+                String navn = tastatur.nextLine();
+        
+                System.out.println("Prisen: ");
+                int pris = tastatur.nextInt();
+                tastatur.nextLine();
+        
+                System.out.println("Virkestoff: ");
+                double virkestoff = tastatur.nextDouble();
+                tastatur.nextLine();
+        
+                System.out.println("Narkotisk styrke: ");
+                int styrke = tastatur.nextInt();
+                tastatur.nextLine();
+        
+                Narkotisk legemiddelA = new Narkotisk(navn, pris, virkestoff, styrke);
+                legesystem.leggTilLegemiddel(legemiddelA);
+                System.out.println("Legemidlet ble lagret!");
+        
+        
+        
+            } else if (nyInput.equals("b")) {
+                System.out.println("Navnet til leggemiddel: ");
+                String navn = tastatur.nextLine();
+        
+                System.out.println("Prisen: ");
+                int pris = tastatur.nextInt();
+                tastatur.nextLine();
+        
+                System.out.println("Virkestoff: ");
+                double virkestoff = tastatur.nextDouble();
+                tastatur.nextLine();
+        
+                System.out.println("Vannedanende styrke: ");
+                int styrke = tastatur.nextInt();
+                tastatur.nextLine();
+        
+                Vanedannende legemiddelB = new Vanedannende(navn, pris, virkestoff, styrke);
+                legesystem.leggTilLegemiddel(legemiddelB);
+                System.out.println("Legemidlet ble lagret!");
+        
+        
+        
+            } else if (nyInput.equals("c")) {
+                System.out.println("Navnet til leggemiddel: ");
+                String navn = tastatur.nextLine();
+        
+                System.out.println("Prisen: ");
+                Integer pris = tastatur.nextInt();
+                tastatur.nextLine();
+        
+                System.out.println("Virkestoff: ");
+                double virkestoff = tastatur.nextDouble();
+                tastatur.nextLine();
+        
+                Vanlig legemiddelC = new Vanlig(navn, pris, virkestoff);
+                legesystem.leggTilLegemiddel(legemiddelC);
+                System.out.println("Legemidlet ble lagret!");
+        
+            } else {
+                System.out.println("ugyldig bokstav");
+            }
+        }   
+        public static void addResept(Scanner scanner){
+        
+            if (pasientListe.hasNext().equals(false)) {
+                System.out.println("Resept kan ikke oprettes.");
+                return;
+            }
+        
+            System.out.println("Hvilken pasient skal utskrives en resept til?");
+            for (Pasient pasient : pasientListe) {
+                System.out.println(pasient.hentId() + ": " + pasient.toString());
+            }
+        
+            Pasient pasient = null;
+            int pasientensId = scanner.nextInt();
+            scanner.nextLine();
+        
+            for (Pasient p : pasientListe) {
+                if (p.hentId() == pasientensId) {
+                    pasient = p;
+        
+                } else {
+                    System.out.println("ugyldig pasient.");
+                    return;
+                }
+            }
+        
+            if (legeListe.hasNext().equals(false)) {
+                System.out.println("Resept kan ikke oprettes.");
+                return;
+            }
+        
+            System.out.println("Hvilken lege skriver ut resepten? ");
+            for (Lege lege : legeListe) {
+                System.out.println(lege.toString());
+            }
+            Lege lege = null;
+            String legensNavn = scanner.nextLine();
+        
+            for (Lege l : legeListe) {
+                if (l.hentNavn().equalsIgnoreCase(legensNavn)) {
+                    lege = l;
+        
+                } else {
+                    System.out.println("Legen finnes ikke.");
+                }
+            }
+        
+            if (legemiddelListe.hasNext()) {
+                System.out.println("Resept kan ikke oprettes.");
+                return;
+            }
+        
+            System.out.println("Hvilket legemiddel skal brukes?");
+            for (Legemiddel legemiddel : legemiddeListe) {
+                System.out.println(legemiddel.toString());
+            }
+            Legemiddel legemiddel = null;
+            String legemiddelNavn = scanner.nextLine();
+        
+            for (Legemiddel lm : legemiddelListe) {
+                if (lm.hentNavn().equalsIgnoreCase(legemiddelNavn)) {
+                    legemiddel = lm;
+        
+                } else {
+                    System.out.println("Legemidlet finnes ikke.");
+                    return;
+                }
+            }
+        
+            System.out.println("Hvor mange ganger kan resepten brukes?");
+            int reit = scanner.nextInt();
+            scanner.nextLine();
+        
+            System.out.println("Hva slags type resept er det?");
+            System.out.println("Er det:\n\t- Blaa Resept: tast \"b\"");
+            System.out.println("\t- P resept: tast \"p\"");
+            System.out.println("\t- Militaer resept: tast \"m\"");
+        
+            String in = scanner.nextLine();
+        
+            if(in.equals("b")) {
+                BlaaResept bResept = new BlaaResept(legemiddel, lege, pasient, reit);
+                lege.skrivBlaaResept(bResept);
+                pasient.leggTilResept(bResept);
+                legesystem.leggTilResept(bResept);
+                System.out.println("Resepten ber lagret!");
+        
+            } else if (in.equals("p")) {
+                Resept pResept = new PResept(legemiddel, lege, pasient, reit);
+                lege.skrivPResept(pResept);
+                pasient.leggTilResept(pResept);
+                legesystem.leggTilResept(pResept);
+                System.out.println("Resepten er lagret!");
+        
+            } else if (in.equals("m")) {
+                Resept mResept = new MilResept(legemiddel, lege, pasient, reit);
+                lege.skrivMilResept(mResept);
+                pasient.leggTilResept(mResept);
+                legesystem.leggTilResept(mResept);
+                System.out.println("Resepten er lagret!");
+        
+            } else {
+                System.out.println("Feil bokstav");
+            }
+        }
     public static void statistikk(){
         System.out.println("Statistikk");
     }
