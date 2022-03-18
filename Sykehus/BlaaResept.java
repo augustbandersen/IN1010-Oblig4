@@ -21,6 +21,6 @@ public class BlaaResept extends Resept{
 
     @Override
     public String finereStreng(){
-        return ("reseptId" + "," + utskrivendeLege.hentLegeNavn() + "," + pasientId + "," + "blaa" + "," + reit);
+        return (legemiddel.hentId() + "," + utskrivendeLege.hentLegeNavn() + "," + pasientId + "," + "blaa" + "," + reit);
     }
 }

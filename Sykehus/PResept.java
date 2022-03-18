@@ -21,6 +21,6 @@ class PResept extends HvitResept{
 
     @Override
     public String finereStreng(){
-        return ("reseptId" + "," + utskrivendeLege.hentLegeNavn() + "," + pasientId + "," + "p" + "," + reit);
+        return (legemiddel.hentId() + "," + utskrivendeLege.hentLegeNavn() + "," + pasientId + "," + "p" + "," + reit);
     }
 }

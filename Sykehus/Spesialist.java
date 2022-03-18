@@ -19,6 +19,6 @@ public class Spesialist extends Lege implements Godkjenningsfritak{
 
     @Override
     public String finereStreng(){
-        return (legeNavn + "," + hentKontrollId());
+        return (legeNavn + "," + kontrollId);
     }
 }
