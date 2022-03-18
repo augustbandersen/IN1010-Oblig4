@@ -18,4 +18,9 @@ public class Narkotisk extends Legemiddel{
     public String toString(){
         return (super.toString() + ", Narkotisk styrke: " + styrke + " Id: " + id);
     }
+
+    @Override
+    public String finereStreng(){
+        return (navn + "," + "Narkotisk" + "," + pris + "," + virkestoff + "," + styrke);
+    }
 }

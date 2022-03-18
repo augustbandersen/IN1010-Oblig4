@@ -18,4 +18,9 @@ public class BlaaResept extends Resept{
         pris = Math.round(pris*0.25f); //runder opp til naermest int
         return pris;
     }
+
+    @Override
+    public String finereStreng(){
+        return ("reseptId" + "," + utskrivendeLege + "," + pasientId + "," + "blaa" + "," + reit);
+    }
 }

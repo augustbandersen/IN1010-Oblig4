@@ -55,4 +55,8 @@ public abstract class Resept {
     public String toString() {
         return("--------------------\n" + "Legemiddel: " + legemiddel.hentNavn() + "\nLege: " + utskrivendeLege.hentLegeNavn() + "\nPasientId: " + pasientId + "\nReit: " + reit);
       }
+
+    public String finereStreng(){
+        return (reseptId + "," + utskrivendeLege + "," + pasientId + "," + "type" + "," + reit);
+    }
 }

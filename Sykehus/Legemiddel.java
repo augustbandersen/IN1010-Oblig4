@@ -38,5 +38,9 @@ abstract class Legemiddel {
 
     public String toString() {
         return("Navn: " + navn + ", Pris: " + pris + ", Virkestoff: " + virkestoff);
-      }
+    }
+
+    public String finereStreng(){
+        return (navn + "," + pris + "," + virkestoff);
+    }
 }
