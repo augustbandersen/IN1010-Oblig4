@@ -5,11 +5,9 @@ import java.io.File;
 
 public class Hovedprogram {
     static Legesystem legesystem = new Legesystem();
+    static boolean startup = true;
+    static Boolean run = true;
     public static void main(String[] args) {
-        
-        try{
-            legesystem.lesFraFil(new File("legedata.txt"));
-        }catch(Exception e){System.out.println("exception " + e);}
         
         Scanner scanner = new Scanner(System.in);
         while(true){
@@ -314,7 +312,35 @@ public class Hovedprogram {
     }
     public static boolean hovedmeny(Scanner scanner){
         String input = "q";
-        Boolean run = true;
+        clearScreen();
+
+        if(startup){
+            System.out.println(
+                "Velkommen, dette er et program som administrerer\n" + 
+                "pasienter, leger, legemiddler og resepter.\n" + 
+                "\nOensker du aa lese inn data fra fil?(j/n)"
+            );
+            input = scanner.nextLine();
+            if(input.equalsIgnoreCase("j")){
+                System.out.println("tast in komplett filsti for filen du oensker aa lese fra");
+                input = scanner.nextLine();
+                try {
+                    lesFraFil(input);
+                    System.out.println("\nLesing fra fil vellykket, tast ENTER for aa gaa til hovedmenyen");
+                    startup = false;
+                    scanner.nextLine();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("Det oppstod en feil under lesing fra fil, oensker du aa prøve igjen?(j/n)");
+                    String input2 = scanner.nextLine();
+                    if(input2.equalsIgnoreCase("j")) hovedmeny(scanner);
+                }
+            }if(input.equalsIgnoreCase("n")){
+                System.out.println("\nTast ENTER for aa gaa til hovedmenyen");
+                startup = false;
+                scanner.nextLine();
+            }
+        }
         clearScreen();
         System.out.println("Hva oensker du aa gjoere?: ");
         System.out.println("    1. Skrive ut fullstendig oversikt");
@@ -368,6 +394,9 @@ public class Hovedprogram {
     }  
     public static void skrivTilFil(Scanner scanner){
         legesystem.skrivTilFil(scanner);
+    }
+    public static void lesFraFil(String filnavn) throws Exception{
+        legesystem.lesFraFil(new File(filnavn));
     }
 }
 
