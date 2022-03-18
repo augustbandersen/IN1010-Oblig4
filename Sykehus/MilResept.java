@@ -14,6 +14,6 @@ public class MilResept extends HvitResept{
 
     @Override
     public String finereStreng(){
-        return ("reseptId" + "," + utskrivendeLege + "," + pasientId + "," + "militaer" + "," + reit);
+        return ("reseptId" + "," + utskrivendeLege.hentLegeNavn() + "," + pasientId + "," + "militaer" + "," + reit);
     }
 }

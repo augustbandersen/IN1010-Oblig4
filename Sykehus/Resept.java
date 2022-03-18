@@ -57,6 +57,6 @@ public abstract class Resept {
       }
 
     public String finereStreng(){
-        return (reseptId + "," + utskrivendeLege + "," + pasientId + "," + "type" + "," + reit);
+        return (reseptId + "," + utskrivendeLege.hentLegeNavn() + "," + pasientId + "," + "type" + "," + reit);
     }
 }
