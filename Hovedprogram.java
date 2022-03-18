@@ -149,21 +149,19 @@ public class Hovedprogram {
             }
         }   
         public static void addResept(Scanner scanner){
-        /*
-            if (legesystem.hentPasientListe().hasNext().equals(false)) {
-                System.out.println("Resept kan ikke oprettes.");
+        
+            if (legesystem.hentPasientListe().stoerrelse() < 1) {
+                System.out.println("Resept kan ikke oprettes da det ikke er registrert noen pasienter enda\nVenligst registrer pasienter foerst.");
                 return;
             }
-        */
+        
             System.out.println("Hvilken pasient skal utskrives en resept til?");
             for (Pasient pasient : legesystem.hentPasientListe()) {
                 System.out.println(pasient.hentId() + ": " + pasient.toString());
             }
         
             Pasient pasient = null;
-            int pasientensId = scanner.nextInt();
-            scanner.nextLine();
-        
+            int pasientensId = Integer.parseInt(scanner.nextLine());        
             for (Pasient p : legesystem.hentPasientListe()) {
                 if (p.hentId() == pasientensId) {
                     pasient = p;
@@ -173,12 +171,12 @@ public class Hovedprogram {
                     return;
                 }
             }
-        /*
-            if (legesystem.hentLegeListe().hasNext().equals(false)) {
-                System.out.println("Resept kan ikke oprettes.");
+        
+            if (legesystem.hentLegeListe().stoerrelse() < 1) {
+                System.out.println("Resept kan ikke oprettes da det ikke er registrert noen leger enda\nVenligst registrer lege(r) først");
                 return;
             }
-        */
+
             System.out.println("Hvilken lege skriver ut resepten? ");
             for (Lege lege : legesystem.hentLegeListe()) {
                 System.out.println(lege.toString());
@@ -194,12 +192,12 @@ public class Hovedprogram {
                     System.out.println("Legen finnes ikke.");
                 }
             }
-        /*
-            if (legesystem.hentLegeListe().hasNext()) {
-                System.out.println("Resept kan ikke oprettes.");
+        
+            if (legesystem.hentLegemiddelListe().stoerrelse() < 1) {
+                System.out.println("Resept kan ikke oprettes da det ikke er registrert noen legemidler enda\nVenligst registrer minst et legemiddel først");
                 return;
             }
-        */
+        
             System.out.println("Hvilket legemiddel skal brukes?");
             for (Legemiddel legemiddel : legesystem.hentLegemiddelListe()) {
                 System.out.println(legemiddel.toString());
@@ -219,8 +217,7 @@ public class Hovedprogram {
         
             System.out.println("Hvor mange ganger kan resepten brukes?");
             int reit = scanner.nextInt();
-            scanner.nextLine();
-        
+
             System.out.println("Hva slags type resept er det?");
             System.out.println("Er det:\n\t- Blaa Resept: tast \"b\"");
             System.out.println("\t- P resept: tast \"p\"");
