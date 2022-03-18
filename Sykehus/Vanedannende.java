@@ -20,6 +20,6 @@ public class Vanedannende extends Legemiddel{
 
     @Override
     public String finereStreng(){
-        return (navn + "," + "Vanedannende" + "," + pris + "," + virkestoff + "," + styrke);
+        return (navn + "," + "vanedannende" + "," + pris + "," + virkestoff + "," + styrke);
     }
 }

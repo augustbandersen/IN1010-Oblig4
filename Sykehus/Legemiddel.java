@@ -41,6 +41,6 @@ public abstract class Legemiddel {
     }
 
     public String finereStreng(){
-        return (navn + "," + pris + "," + virkestoff);
+        return (navn + "," +"vanlig," + pris + "," + virkestoff);
     }
 }

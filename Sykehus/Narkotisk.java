@@ -21,6 +21,6 @@ public class Narkotisk extends Legemiddel{
 
     @Override
     public String finereStreng(){
-        return (navn + "," + "Narkotisk" + "," + pris + "," + virkestoff + "," + styrke);
+        return (navn + "," + "narkotisk" + "," + pris + "," + virkestoff + "," + styrke);
     }
 }
