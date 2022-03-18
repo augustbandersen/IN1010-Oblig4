@@ -17,4 +17,9 @@ public class Vanedannende extends Legemiddel{
     public String toString(){
         return (super.toString() + ", Vanedannende styrke: " + styrke + ", Id: " + id);
     }
+
+    @Override
+    public String finereStreng(){
+        return (navn + "," + "Vanedannende" + "," + pris + "," + virkestoff + "," + styrke);
+    }
 }

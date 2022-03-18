@@ -16,4 +16,9 @@ public class HvitResept extends Resept{
     public int prisAaBetale(){ 
         return legemiddel.hentPris();
     }
+
+    @Override
+    public String finereStreng(){
+        return (legemiddel.hentId() + "," + utskrivendeLege.hentLegeNavn() + "," + pasientId + "," + "hvit" + "," + reit);
+    }
 }

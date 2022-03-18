@@ -11,4 +11,9 @@ public class MilResept extends HvitResept{
     public int prisAaBetale(){
         return 0;
     }
+
+    @Override
+    public String finereStreng(){
+        return (legemiddel.hentId() + "," + utskrivendeLege.hentLegeNavn() + "," + pasientId + "," + "militaer" + "," + reit);
+    }
 }

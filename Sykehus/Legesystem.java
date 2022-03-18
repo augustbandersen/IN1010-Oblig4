@@ -255,12 +255,19 @@ public class Legesystem {
 
             skriver.write("# Pasienter (navn, fnr)\n");
             skriver.write(pasientListe.finereStreng());
+            
             skriver.write("# Legemidler (navn,type,pris,virkestoff,[styrke])\n");
-            skriver.write(legemiddelListe.finereStreng());
+            for (Legemiddel l : legemiddelListe){
+                skriver.write(l.finereStreng() +"\n");
+            }
             skriver.write("# Leger (navn,kontrollid / 0 hvis vanlig lege)\n");
-            skriver.write(legeListe.finereStreng());
+            for (Lege l : legeListe){
+                skriver.write(l.finereStreng() +"\n");
+            }
             skriver.write("# Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])\n");
-            skriver.write(reseptListe.finereStreng());
+            for (Resept r : reseptListe){
+                skriver.write(r.finereStreng() +"\n");
+            }
 
             System.out.println("Skriving til filen: " + filNavn + ", vellykket.");
             skriver.close();
@@ -281,3 +288,4 @@ public class Legesystem {
         return this.legemiddelListe;
     }
 }
+

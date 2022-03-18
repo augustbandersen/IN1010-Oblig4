@@ -20,7 +20,6 @@ public class Lege implements Comparable<Lege> {
     }
 
     @Override
-    // Hentet fra https://stackoverflow.com/questions/26553889/comparing-2-strings-by-ascii-values-in-java
     public int compareTo(Lege lege){
         int sammenlikning = 0;
         int s1;
@@ -87,5 +86,9 @@ public class Lege implements Comparable<Lege> {
         BlaaResept blaaResept = new BlaaResept(legemiddel, this, pasient.hentId(), reit);
         utskrevneResepter.leggTil(blaaResept);
         return blaaResept;
+    }
+
+    public String finereStreng(){
+        return (legeNavn + ", 0");
     }
 }

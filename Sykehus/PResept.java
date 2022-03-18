@@ -18,4 +18,9 @@ public class PResept extends HvitResept{
             return 0;
         }
     }
+
+    @Override
+    public String finereStreng(){
+        return (legemiddel.hentId() + "," + utskrivendeLege.hentLegeNavn() + "," + pasientId + "," + "p" + "," + reit);
+    }
 }
