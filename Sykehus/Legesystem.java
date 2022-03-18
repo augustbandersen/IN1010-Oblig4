@@ -234,31 +234,42 @@ public class Legesystem {
         return this.pasientListe;
     }
 
-    public void skrivTilFil(String filnavn){
-        //Lage fil
-        try {
-            File minFil = new File(filnavn);
-
+    public void skrivTilFil(Scanner scanner){
+        String filNavn = scanner.nextLine();
+        try { //Lage ny fil
+            File minFil = new File(filNavn);
+            if (minFil.createNewFile()){
+                System.out.println("Ny fil opprettet: " + minFil.getName());
+            } else {
+                System.out.println("Filen finnes fra for av.");
+            }
             
         } catch (Exception e) {
-            //TODO: handle exception
+            System.out.println("Det skjedde en feil ved oppretting av fil.");
         }
 
 
-        try {
-            FileWriter skriver = new FileWriter(filnavn);
+        try { //Skrive til fil
+            FileWriter skriver = new FileWriter(filNavn);
+            System.out.println("Prover aa skrive til filen: " + filNavn);
+
             skriver.write("# Pasienter (navn, fnr)\n");
-            skriver.write(pasientListe.toString());
+            skriver.write(pasientListe.finereStreng());
             skriver.write("# Legemidler (navn,type,pris,virkestoff,[styrke])\n");
-            skriver.write("");
+            skriver.write(legemiddelListe.finereStreng());
             skriver.write("# Leger (navn,kontrollid / 0 hvis vanlig lege)\n");
-
+            skriver.write(legeListe.finereStreng());
             skriver.write("# Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])\n");
+            skriver.write(reseptListe.finereStreng());
 
-            
-        } catch (Exception e) {
-            //TODO: handle exception
+            System.out.println("Skriving til filen: " + filNavn + ", vellykket.");
+            skriver.close();
+        } catch (Exception e) { //Hvis skriving til fil feiler
+            System.out.println("Skriving til filen: '" + filNavn + "' feilet.");
         }
+
+        System.out.print("Trykk Enter for aa returnere til hovedmeny");
+        scanner.nextLine();
     }
     public Prioritetskoe<Lege> hentLegeListe(){
         return this.legeListe;
