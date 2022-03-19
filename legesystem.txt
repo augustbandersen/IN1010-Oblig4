@@ -18,3 +18,4 @@ Dr. Wilson, 0
 1,Dr. Hillestad Lovold,3,blaa,1000
 3,Dr. House,1,militaer,3
 4,Dr. Hillestad Lovold,3,p,25
+4,Dr. Wilson,1,p,60

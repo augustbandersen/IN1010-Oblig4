@@ -8,7 +8,7 @@ public class Hovedprogram {
     static boolean startup = true;
     static Boolean run = true;
     public static void main(String[] args) {
-        
+        //try {lesFraFil("legedata.txt");} catch (Exception e) {e.printStackTrace();}
         Scanner scanner = new Scanner(System.in);
         while(true){
             if(!hovedmeny(scanner)) break;
@@ -19,7 +19,7 @@ public class Hovedprogram {
         System.out.println("Oversikt");
     }
     public static void leggTil(Scanner in){ // Yuki
-        System.out.println("Ønkser du å legge til:\n\t- Lege, tast \"1\"");
+        System.out.println("Oenkser du aa legge til:\n\t- Lege, tast \"1\"");
             System.out.println("\t- Pasient, tast \"2\"\n\t- Legemiddel, tast \"3\"");
             System.out.println("\t- Resept, tast \"4\"");
             String nyValg = in.nextLine();
@@ -37,7 +37,7 @@ public class Hovedprogram {
                 addResept(in);
         
             } else {
-                System.out.println("Ugyldig valg, prov igjen.");
+                System.out.println("Ugyldig valg, proev igjen.");
             }
         }
         public static void addLege(Scanner lege){
@@ -54,10 +54,15 @@ public class Hovedprogram {
                 String kontrollId = lege.nextLine();
                 Lege nyLege = new Spesialist(navn, kontrollId);
                 legesystem.leggTilLege(nyLege);
-        
-            } else if(legeValg.equals("2")) {
+            }
+            else if(legeValg.equals("2")) {
                 Lege nyLege = new Lege(navn);
                 legesystem.leggTilLege(nyLege);
+            }else{
+                System.out.println("Ugyldig input, venligst proev igjen");
+                System.out.println("Tast ENTER for aa returnere til hovedmenyen");
+                lege.nextLine();
+                return;
             }
             System.out.println("Legen er blitt lagret! Tast enter for aa returnere til hovedmenyen.");
             lege.nextLine();
@@ -147,74 +152,89 @@ public class Hovedprogram {
             }
         }   
         public static void addResept(Scanner scanner){
-        
-            if (legesystem.hentPasientListe().stoerrelse() < 1) {
+            Prioritetskoe<Lege> legeListe = legesystem.hentLegeListe();
+            IndeksertListe<Pasient> pasientListe = legesystem.hentPasientListe();
+            IndeksertListe<Legemiddel> legemiddelListe = legesystem.hentLegemiddelListe();
+
+            if (pasientListe.stoerrelse() < 1) {
                 System.out.println("Resept kan ikke oprettes da det ikke er registrert noen pasienter enda\nVenligst registrer pasienter foerst.");
+                System.out.println("Tast ENTER for aa returnere til hovedmenyen");
+                scanner.nextLine();
                 return;
             }
         
             System.out.println("Hvilken pasient skal utskrives en resept til?");
-            for (Pasient pasient : legesystem.hentPasientListe()) {
+            for (Pasient pasient : pasientListe) {
                 System.out.println(pasient.hentId() + ": " + pasient.toString());
             }
         
             Pasient pasient = null;
             int pasientensId = Integer.parseInt(scanner.nextLine());        
-            for (Pasient p : legesystem.hentPasientListe()) {
+            for (Pasient p : pasientListe) {
                 if (p.hentId() == pasientensId) {
                     pasient = p;
-        
-                } else {
-                    System.out.println("ugyldig pasient.");
-                    return;
                 }
             }
+            if(pasient == null){
+                    System.out.println("ugyldig pasient.");
+                    System.out.println("Tast ENTER for aa returnere til hovedmenyen");
+                    scanner.nextLine();
+                    return;
+            }
         
-            if (legesystem.hentLegeListe().stoerrelse() < 1) {
+            if (legeListe.stoerrelse() < 1) {
                 System.out.println("Resept kan ikke oprettes da det ikke er registrert noen leger enda\nVenligst registrer lege(r) først");
+                System.out.println("Tast ENTER for aa returnere til hovedmenyen");
+                scanner.nextLine();
                 return;
             }
 
-            System.out.println("Hvilken lege skriver ut resepten? ");
-            for (Lege lege : legesystem.hentLegeListe()) {
-                System.out.println(lege.toString());
+            System.out.println("Hvilken lege skriver ut resepten?");
+            for (Lege lege: legeListe) {
+                System.out.println(lege.hentLegeNavn());
             }
             Lege lege = null;
             String legensNavn = scanner.nextLine();
         
-            for (Lege l : legesystem.hentLegeListe()) {
+            for (Lege l : legeListe) {
                 if (l.hentLegeNavn().equalsIgnoreCase(legensNavn)) {
                     lege = l;
-        
-                } else {
-                    System.out.println("Legen finnes ikke.");
                 }
             }
+            if(lege == null){
+                System.out.println("Legen finnes ikke.");
+                System.out.println("Tast ENTER for aa returnere til hovedmenyen");
+                scanner.nextLine();
+            }
         
-            if (legesystem.hentLegemiddelListe().stoerrelse() < 1) {
+            if (legemiddelListe.stoerrelse() < 1) {
                 System.out.println("Resept kan ikke oprettes da det ikke er registrert noen legemidler enda\nVenligst registrer minst et legemiddel først");
+                System.out.println("Tast ENTER for aa returnere til hovedmenyen");
+                scanner.nextLine();
                 return;
             }
         
             System.out.println("Hvilket legemiddel skal brukes?");
-            for (Legemiddel legemiddel : legesystem.hentLegemiddelListe()) {
-                System.out.println(legemiddel.toString());
+            for (Legemiddel legemiddel : legemiddelListe) {
+                System.out.println(legemiddel.hentNavn());
             }
             Legemiddel legemiddel = null;
             String legemiddelNavn = scanner.nextLine();
         
-            for (Legemiddel lm : legesystem.hentLegemiddelListe()) {
+            for (Legemiddel lm : legemiddelListe) {
                 if (lm.hentNavn().equalsIgnoreCase(legemiddelNavn)) {
                     legemiddel = lm;
-        
-                } else {
-                    System.out.println("Legemidlet finnes ikke.");
-                    return;
                 }
+            }
+            if(legemiddel == null){
+                System.out.println("Legemidlet finnes ikke.");
+                System.out.println("Tast ENTER for aa returnere til hovedmenyen");
+                scanner.nextLine();
+                return;
             }
         
             System.out.println("Hvor mange ganger kan resepten brukes?");
-            int reit = scanner.nextInt();
+            int reit = Integer.parseInt(scanner.nextLine());
 
             System.out.println("Hva slags type resept er det?");
             System.out.println("Er det:\n\t- Blaa Resept: tast \"b\"");
@@ -228,7 +248,7 @@ public class Hovedprogram {
                     Resept bResept = lege.skrivBlaaResept(legemiddel, pasient, reit);
                     pasient.leggTilResept(bResept);
                     legesystem.leggTilResept(bResept);
-                    System.out.println("Resepten ber lagret!");
+                    System.out.println("Resepten er lagret!");
                 }catch(UlovligUtskrift uu){System.out.println(uu);}
                 
         
@@ -256,7 +276,11 @@ public class Hovedprogram {
         
             } else {
                 System.out.println("Ugyldig input, venligst prøv igen");
+                System.out.println("Tast ENTER for aa returnere til hovedmenyen");
+                scanner.nextLine();
             }
+            System.out.println("Tast ENTER for aa returnere til hovedmenyen");
+            scanner.nextLine();
         }
     public static void statistikk(){
         System.out.println("Statistikk");
@@ -326,7 +350,9 @@ public class Hovedprogram {
                 input = scanner.nextLine();
                 try {
                     lesFraFil(input);
-                    System.out.println("\nLesing fra fil vellykket, tast ENTER for aa gaa til hovedmenyen");
+                    System.out.println("\nLesing fra fil vellykket, det ble lest inn " + legesystem.hentLegeListe().stoerrelse() + 
+                    " leger, " + legesystem.hentPasientListe().stoerrelse() + " pasienter, " + legesystem.hentLegemiddelListe().stoerrelse() + 
+                    " legemidler og " + legesystem.hentReseptListe().stoerrelse() + " resepter.\nTast ENTER for aa gaa til hovedmenyen");
                     startup = false;
                     scanner.nextLine();
                 } catch (Exception e) {

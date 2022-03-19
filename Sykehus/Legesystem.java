@@ -94,7 +94,7 @@ public class Legesystem {
                     if(resepttype.equals("p")){
                         resept = lege.skrivPResept(legemiddel, pasient, reit);
                     }
-                    leggTilResept(resept); System.out.println("resept");
+                    leggTilResept(resept);
                     pasient.leggTilResept(resept);
                 }
             }
