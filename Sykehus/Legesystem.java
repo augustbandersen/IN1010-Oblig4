@@ -50,10 +50,8 @@ public class Legesystem {
                     String kontrollid = linje[1];
                     Lege lege;
 
-                    if(!kontrollid.equals("0")){
-                        lege = new Spesialist(navn, kontrollid);
-                    }
-                    else{lege = new Lege(navn);}
+                    if(kontrollid.strip().equals("0")) lege = new Lege(navn);
+                    else lege = new Spesialist(navn, kontrollid);
 
                     leggTilLege(lege);
                 }

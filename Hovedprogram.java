@@ -8,15 +8,12 @@ public class Hovedprogram {
     static boolean startup = true;
     static Boolean run = true;
     public static void main(String[] args) {
-        //try {lesFraFil("legedata.txt");} catch (Exception e) {e.printStackTrace();}
+        //try {lesFraFil("legedata.txt");} catch (Exception e) {e.printStackTrace();} //kommenter ut om man ikke ønsker å lese fil ved oppstart automatisk
         Scanner scanner = new Scanner(System.in);
         while(true){
             if(!hovedmeny(scanner)) break;
         }
         scanner.close();
-    }
-    public static void oversikt(){
-        System.out.println("Oversikt");
     }
     public static void leggTil(Scanner in){ // Yuki
         System.out.println("Oenkser du aa legge til:\n\t- Lege, tast \"1\"");
@@ -74,11 +71,10 @@ public class Hovedprogram {
         
             System.out.println("Hva er pasientens fodselsnummer? ");
             String fnr = pasient.nextLine();
-            pasient.nextLine();
-        
             Pasient nyPasient = new Pasient (navn, fnr);
             legesystem.leggTilPasient(nyPasient);
-            System.out.println("Pasienten ble lagret!");
+            System.out.println("Pasienten ble lagret!\nTast ENTER for aa returnere til hovedmenyen");
+            pasient.nextLine();
         }
         public static void addLegemiddel(Scanner tastatur){
             System.out.println("Hva slags type legemiddel er det?");
@@ -105,7 +101,8 @@ public class Hovedprogram {
         
                 Narkotisk legemiddelA = new Narkotisk(navn, pris, virkestoff, styrke);
                 legesystem.leggTilLegemiddel(legemiddelA);
-                System.out.println("Legemidlet ble lagret!");
+                System.out.println("Legemidlet ble lagret!\nTast ENTER for aa returnere til hovedmenyen");
+                tastatur.nextLine();
         
         
         
@@ -127,7 +124,8 @@ public class Hovedprogram {
         
                 Vanedannende legemiddelB = new Vanedannende(navn, pris, virkestoff, styrke);
                 legesystem.leggTilLegemiddel(legemiddelB);
-                System.out.println("Legemidlet ble lagret!");
+                System.out.println("Legemidlet ble lagret!\nTast ENTER for aa returnere til hovedmenyen");
+                tastatur.nextLine();
         
         
         
@@ -145,10 +143,12 @@ public class Hovedprogram {
         
                 Vanlig legemiddelC = new Vanlig(navn, pris, virkestoff);
                 legesystem.leggTilLegemiddel(legemiddelC);
-                System.out.println("Legemidlet ble lagret!");
+                System.out.println("Legemidlet ble lagret!\nTast ENTER for aa returnere til hovedmenyen");
+                tastatur.nextLine();
         
             } else {
-                System.out.println("ugyldig bokstav");
+                System.out.println("ugyldig bokstav\nTast ENTER for aa returnere til hovedmenyen");
+                tastatur.nextLine();
             }
         }   
         public static void addResept(Scanner scanner){
@@ -238,6 +238,7 @@ public class Hovedprogram {
 
             System.out.println("Hva slags type resept er det?");
             System.out.println("Er det:\n\t- Blaa Resept: tast \"b\"");
+            System.out.println("\t- Hvit resept: tast \"h\"");
             System.out.println("\t- P resept: tast \"p\"");
             System.out.println("\t- Militaer resept: tast \"m\"");
         
@@ -274,10 +275,20 @@ public class Hovedprogram {
                     e.printStackTrace();
                 }
         
+            }else if(in.equals("h")) {
+                try{
+                    Resept hResept = lege.skrivHvitResept(legemiddel, pasient, reit);
+                    pasient.leggTilResept(hResept);
+                    legesystem.leggTilResept(hResept);
+                    System.out.println("Resepten er lagret!");
+                }catch(UlovligUtskrift uu){System.out.println(uu);}
+                
+        
             } else {
                 System.out.println("Ugyldig input, venligst prøv igen");
                 System.out.println("Tast ENTER for aa returnere til hovedmenyen");
                 scanner.nextLine();
+                return;
             }
             System.out.println("Tast ENTER for aa returnere til hovedmenyen");
             scanner.nextLine();

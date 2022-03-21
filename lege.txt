@@ -3,18 +3,22 @@ Jens Hans Olsen,11111143521
 Petrolina Swiq,24120099343
 Sven Svendsen,10111224244
 Juni Olsen,21049563451
+Elias Selvik Undal,19090144534
 # Legemidler (navn,type,pris,virkestoff,[styrke])
-Predizol,narkotisk,450,75,8
-Paralgin Forte,vanedannende,65,400,5
-Placebo Pianissimo,vanlig,10,0
-Ibux,vanlig,240,200
+Predizol,narkotisk,450,75.0,8
+Paralgin Forte,vanedannende,65,400.0,5
+Placebo Pianissimo,vanlig,10,0.0
+Ibux,vanlig,240,200.0
+Paracet,vanlig,84,20.0
 # Leger (navn,kontrollid / 0 hvis vanlig lege)
-Dr. Cox,0
-Dr. Wilson,0
-Dr. House,12345
+Dr. Cox,0 
 Dr. Hillestad Lovold,98765
+Dr. House,12345
+Dr. Lyngset,134591343
+Dr. Wilson, 0
 # Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])
 2,Dr. Cox,2,hvit,1
 1,Dr. Hillestad Lovold,3,blaa,1000
-3,Dr. House,1,militaer
+3,Dr. House,1,militaer,3
 4,Dr. Hillestad Lovold,3,p,25
+5,Dr. Lyngset,5,blaa,3
